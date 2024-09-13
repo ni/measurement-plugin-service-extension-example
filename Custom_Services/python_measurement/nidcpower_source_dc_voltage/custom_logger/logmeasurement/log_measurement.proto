@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package external_driver_wrapper;
+
+service LogMeasurement {
+  rpc LogMeasurement(LogMeasurementRequest) returns (LogMeasurementResponse);
+}
+
+message LogMeasurementResponse{}
+
+message LogMeasurementRequest{
+
+  repeated int32 measured_sites = 1;
+
+  repeated string measured_pins = 2;
+
+  repeated float voltage = 3;
+
+  repeated float current = 4;
+
+  repeated bool in_compliance = 5;
+}
