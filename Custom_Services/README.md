@@ -1,7 +1,8 @@
 # Custom Measurement Plugin Services
 
 This README provides a step-by-step guide to create a data logging service. The process involves
-creating a proto file, generating stubs, and establishing a connection.
+creating a proto file, generating stubs, establishing a connection and usage of the datalogger
+service in different Measurements.
 
 - Protobuf Compiler
 - gRPC
@@ -35,12 +36,18 @@ message LogResponse {
 Use the protobuf compiler to generate the gRPC code from the proto file.
 
 ```sh
-protoc --python_out=. --grpc_python_out=. custom_measurement.proto
+protoc --python_out=. --grpc_python_out=. <proto_file>
 ```
 
-## Step 3: Implement the Service
+## Step 3: Implement the Logger Service
 
 Create a server implementation for the service.
+
+- Initialize a gRPC server.
+- Register the DataLoggingService implementation with the gRPC server. This allows the server to
+  handle incoming requests.
+- Configure and start a gRPC server to listen for incoming connections on a port, and then keep the
+  server running indefinitely to handle incoming requests.
 
 ```python
 import grpc
@@ -68,6 +75,9 @@ if __name__ == '__main__':
 
 Create a client to connect to the server and log data.
 
+- Create a gRPC client that connects to a server running on a localhost.
+- This creates a stub for the custom service.
+
 ```python
 import grpc
 import custom_measurement_pb2
@@ -83,7 +93,71 @@ if __name__ == '__main__':
         run()
 ```
 
+## Using the Logging Service in Python
+
+- Define Service Interface and Class Names:
+  - Set the gRPC service interface and class names.
+
+```python
+GRPC_SERVICE_INTERFACE_NAME = "ni.measurementlink.logger.v1.LogService"
+GRPC_SERVICE_CLASS = "ni.measurementlink.logger.v1.LogService"
+```
+
+- Create a Discovery Client:
+  - Instantiate a DiscoveryClient to resolve the service location.
+
+```python
+discovery_client = DiscoveryClient()
+```
+
+- Resolve the Service Location:
+  - Use the discovery client to resolve the service location based on the provided interface and
+    service class.
+
+```python
+service_location = discovery_client.resolve_service(
+    provided_interface=GRPC_SERVICE_INTERFACE_NAME,
+    service_class=GRPC_SERVICE_CLASS
+)
+```
+
+- Create a gRPC Channel:
+  - Create an insecure gRPC channel to the resolved service location.
+
+```python
+channel = grpc.insecure_channel(service_location.insecure_address)
+```
+
+- Create a Stub for the Logging Service:
+  - Create a stub for the LogMeasurement service using the gRPC channel.
+
+```python
+stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel=channel)
+```
+
+- Prepare the Data for Logging:
+
+```python
+voltage = [measurement.voltage for measurement in measurements]
+current = [measurement.current for measurement in measurements]
+in_compliance = [measurement.in_compliance for measurement in measurements]
+```
+
+- Call the LogMeasurement API:
+
+```python
+stub.LogMeasurement(LogMeasurementRequest(
+    measured_sites=measured_sites,
+    measured_pins=measured_pins,
+    voltage=voltage,
+    current=current,
+    in_compliance=in_compliance,
+))
+```
+
+## Using the Logging Service in LabVIEW
+
 ## Conclusion
 
-This guide covered creating a proto file, generating stubs, implementing the service, and
-establishing a connection.
+This guide covered creating a proto file, generating stubs, implementing the service, establishing a
+connection and usage of the datalogger service in different Measurements.
