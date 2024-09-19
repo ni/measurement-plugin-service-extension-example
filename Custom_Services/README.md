@@ -125,7 +125,6 @@ class MeasurementService(LogMeasurementServicer):
 
         # Step 3: Add Metadata and Parameters
         for pin_index, pin in enumerate(request.measured_pins):
-            data.add_numeric_parameter("Site", float(request.measured_sites[pin_index]), "S")
             data.add_string_parameter("Pin", pin)
             
             measurement = MeasurementDetails(
