@@ -1,8 +1,8 @@
 # Custom Measurement Plugin Services
 
-This README provides a step-by-step guide to create a data logging service. The process involves
-creating a proto file, generating stubs, establishing a connection and usage of the datalogger
-service in different Measurements.
+This README provides a step-by-step guide to create a custom service. The process involves creating
+a proto file, generating stubs, establishing a connection, and using the custom service in
+different measurements.
 
 - Protobuf Compiler
 - gRPC
@@ -18,16 +18,18 @@ syntax = "proto3";
 
 package custom_measurement;
 
-service DataLoggingService {
-    rpc LogData (LogRequest) returns (LogResponse);
+service CustomService {
+    rpc PerformAction (ActionRequest) returns (ActionResponse);
 }
 
-message LogRequest {
-    string data = 1;
+message ActionRequest {
+    string action = 1;
+    string parameters = 2;
 }
 
-message LogResponse {
+message ActionResponse {
     bool success = 1;
+    string result = 2;
 }
 ```
 
@@ -39,7 +41,7 @@ Use the protobuf compiler to generate the gRPC code from the proto file.
 protoc --python_out=. --grpc_python_out=. <proto_file>
 ```
 
-## Step 3: Implement the Logger Service
+## Step 3: Implement the Custom Service
 
 Create a server implementation for the service.
 
@@ -55,25 +57,27 @@ from concurrent import futures
 import custom_measurement_pb2
 import custom_measurement_pb2_grpc
 
-class DataLoggingService(custom_measurement_pb2_grpc.DataLoggingServiceServicer):
-        def LogData(self, request, context):
-                print(f"Received data: {request.data}")
-                return custom_measurement_pb2.LogResponse(success=True)
+class CustomService(custom_measurement_pb2_grpc.CustomServiceServicer):
+    def PerformAction(self, request, context):
+        print(f"Received action: {request.action} with parameters: {request.parameters}")
+        # Implement your custom logic here
+        result = f"Action {request.action} performed with parameters {request.parameters}"
+        return custom_measurement_pb2.ActionResponse(success=True, result=result)
 
 def serve():
-        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        custom_measurement_pb2_grpc.add_DataLoggingServiceServicer_to_server(DataLoggingService(), server)
-        server.add_insecure_port('[::]:50051')
-        server.start()
-        server.wait_for_termination()
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    custom_measurement_pb2_grpc.add_CustomServiceServicer_to_server(CustomService(), server)
+    server.add_insecure_port('[::]:50051')
+    server.start()
+    server.wait_for_termination()
 
 if __name__ == '__main__':
-        serve()
+    serve()
 ```
 
 ## Step 4: Establish Connection
 
-Create a client to connect to the server and log data.
+Create a client to connect to the server and perform actions.
 
 - Create a gRPC client that connects to a server running on a localhost.
 - This creates a stub for the custom service.
@@ -93,7 +97,9 @@ if __name__ == '__main__':
         run()
 ```
 
-## Using the Logging Service in Python
+## Using the Custom Service in Python
+
+Here is an example of how to integrate a custom logging service in Python.
 
 - Define Service Interface and Class Names:
   - Set the gRPC service interface and class names.
@@ -128,14 +134,14 @@ service_location = discovery_client.resolve_service(
 channel = grpc.insecure_channel(service_location.insecure_address)
 ```
 
-- Create a Stub for the Logging Service:
-  - Create a stub for the LogMeasurement service using the gRPC channel.
+- Create a Stub for the Custom Service:
+  - Create a stub for the CustomService using the gRPC channel.
 
 ```python
 stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel=channel)
 ```
 
-- Prepare the Data for Logging:
+- Prepare the Data for the Action:
 
 ```python
 voltage = [measurement.voltage for measurement in measurements]
@@ -143,7 +149,7 @@ current = [measurement.current for measurement in measurements]
 in_compliance = [measurement.in_compliance for measurement in measurements]
 ```
 
-- Call the LogMeasurement API:
+- Call the APIs:
 
 ```python
 stub.LogMeasurement(LogMeasurementRequest(
@@ -160,4 +166,4 @@ stub.LogMeasurement(LogMeasurementRequest(
 ## Conclusion
 
 This guide covered creating a proto file, generating stubs, implementing the service, establishing a
-connection and usage of the datalogger service in different Measurements.
+connection, and using the custom service in different measurements.
