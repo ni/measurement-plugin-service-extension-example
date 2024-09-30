@@ -135,15 +135,26 @@ def measure(
     GRPC_SERVICE_INTERFACE_NAME = "ni.measurementlink.logger.v1.LogService"
     GRPC_SERVICE_CLASS = "ni.measurementlink.logger.v1.LogService"
 
+    # Initialize the discovery client
     discovery_client = DiscoveryClient()
+
+    # Resolve the service location using the discovery client
     service_location = discovery_client.resolve_service(
     provided_interface=GRPC_SERVICE_INTERFACE_NAME,
     service_class=GRPC_SERVICE_CLASS)
+
+    # Create a gRPC channel to the resolved service location
     channel = grpc.insecure_channel(service_location.insecure_address)
+
+    # Create a gRPC stub for the LogMeasurement service
     stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = channel)
+
+    # Extract measurement data
     voltage=[measurement.voltage for measurement in measurements]
     current=[measurement.current for measurement in measurements]
     in_compliance=[measurement.in_compliance for measurement in measurements]
+
+    # Create and send a LogMeasurement request
     stub.LogMeasurement(LogMeasurementRequest(
         measured_sites=measured_sites,
         measured_pins=measured_pins,

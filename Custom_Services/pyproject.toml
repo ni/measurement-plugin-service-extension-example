@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "nidcpower_source_dc_voltage"
-version = "0.5.0"
+name = "custom_logger_service"
+version = "1.0.0"
 package-mode = false
-description = "Measurement plug-in example that sources and measures a DC voltage with an NI SMU."
+description = "A custom service that logs the measurement data received in the request to a CSV file."
 authors = ["National Instruments"]
 
 [tool.poetry.dependencies]

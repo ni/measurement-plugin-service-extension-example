@@ -1,16 +1,23 @@
 from grpc.framework.foundation import logging_pool
 import grpc
 import csv
-import json
 from stubs.log_measurement_pb2 import LogMeasurementResponse
 from stubs.log_measurement_pb2_grpc import LogMeasurementServicer, add_LogMeasurementServicer_to_server
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
 from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
 
 class MeasurementService(LogMeasurementServicer):
-    def LogMeasurement(self, request, context):
-        # Implement your logic to handle the measurement request here
-        # For example, you can log the measurement data to a file or database
+    def LogMeasurement(self, request, context):        
+        """Logs the measurement data received in the request to a CSV file and prints the received
+        measurement.
+
+        Args:
+            request: The measurement data to be logged.
+            context: The context of the request.
+
+        Returns:
+            The response after logging the measurement.
+        """ 
         with open('measurements.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([request])
@@ -19,6 +26,7 @@ class MeasurementService(LogMeasurementServicer):
         return LogMeasurementResponse()
 
 def serve():
+    """Starts the gRPC server and registers the service with the service registry."""
     server = grpc.server(logging_pool.pool(max_workers=10))
     add_LogMeasurementServicer_to_server(MeasurementService(), server)
     host = "[::1]"

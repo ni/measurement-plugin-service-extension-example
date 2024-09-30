@@ -2,19 +2,25 @@ from grpc.framework.foundation import logging_pool
 from datetime import datetime
 import os
 import grpc
-import csv
-import json
 from stubs.log_measurement_pb2 import LogMeasurementResponse
 from stubs.log_measurement_pb2_grpc import LogMeasurementServicer, add_LogMeasurementServicer_to_server
-from bdcdatalogger import Channel, Fields, MeasurementDetails, Series, TestRun, Waveform
+from bdcdatalogger import Fields, MeasurementDetails, TestRun
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
 from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
 
 
 class MeasurementService(LogMeasurementServicer):
     def LogMeasurement(self, request, context):
-        # Implement your logic to handle the measurement request here
-        # For example, you can log the measurement data to a file or database
+        """Logs the measurement data received in the request to a CSV file in BDC format and prints
+        the received measurement.
+
+        Args:
+            request: The measurement data to be logged.
+            context: The context of the request.
+
+        Returns:
+            The response after logging the measurement.
+        """ 
         METADATA = {
             Fields.ProgramName: "DC Power",
         }
