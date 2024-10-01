@@ -40,15 +40,13 @@ protoc --python_out=. --grpc_python_out=. <proto_file>
 
 Create a server implementation for the service.
 
-### Implementing a simple Custom Service and log data in a csv file
+### Implementing a simple Custom Service and add the custom logic
 
 - Initialize a gRPC server.
 - Register the service implementation with the gRPC server. This allows the server to
   handle incoming requests.
 - Configure and start a gRPC server to listen for incoming connections on a port, and then keep the
   server running indefinitely to handle incoming requests.
-- Open the CSV File in a preferred Mode.
-- Write the action, parameters, and result to the CSV file.
 
 ```python
 import grpc
@@ -56,105 +54,56 @@ from concurrent import futures
 import custom_measurement_pb2
 import custom_measurement_pb2_grpc
 
-class CustomService(custom_measurement_pb2_grpc.CustomServiceServicer):
+class CustomService(custom_measurement_pb2_grpc.CustomServiceServicer) -> ActionResponse:
     def PerformAction(self, request, context):
         print(f"Received action: {request.action} with parameters: {request.parameters}")
         # Implement your custom logic here
-        with open(csv_file_path, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([request])
+        action = request.action
+        parameters = request.parameters
+        # Example logic
+        if action == "example_action":
+            result = f"Performed {action} with parameters {parameters}"
+            success = True
+        else:
+            result = "Unknown action"
+            success = False
 
-        return LogMeasurementResponse()
-
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    custom_measurement_pb2_grpc.add_CustomServiceServicer_to_server(CustomService(), server)
-    server.add_insecure_port('[::]:50051')
-    server.start()
-    server.wait_for_termination()
-
-if __name__ == '__main__':
-    serve()
+        return ActionResponse(success=success, result=result)
 ```
 
-### Implementing a Custom Service with BDC Logger and log data in a csv file
+### Register the Service with the Discovery Service
 
-- Initialize a gRPC server.
-- Register the service implementation with the gRPC server. This allows the server to
-  handle incoming requests.
-- Configure and start a gRPC server to listen for incoming connections on a port, and then keep the
-  server running indefinitely to handle incoming requests.
-- Install the `whl` file for BDC Logger. This installs all the dependencies of the bdc logger.
-
-```sh
-pip install .\bdcdatalogger-22.8.0-py3-none-any.whl
-```
-
-- Import necessary modules.
-- Create a metadata dictionary to store relevant information about the program or test.
-- Create an instance of TestRun with the metadata, folder path, and file name where the logs will be
-  stored.
-- Use the Metadata object from the TestRun instance to add numeric and string parameters, as well as
-  additional information.
-- Iterate over the measured pins and log the voltage measurements along with additional information
-  like current, compliance status, and timestamp.
-- Remove all metadata, parameters, and additional information from the Metadata object to clean up
-  after logging.
+- Create a gRPC Server.
+- Add the Custom Service to the server.
+- Bind the server to a random available port and start the server.
+- Register the Service with the Discovery Service through the service information.
+- When the server is stopped, the service is unregistered from the discovery service.
 
 ```python
-import grpc
-from concurrent import futures
-import custom_measurement_pb2
-import custom_measurement_pb2_grpc
-from bdcdatalogger import Channel, Fields, MeasurementDetails, Series, TestRun, Waveform
-
-class MeasurementService(LogMeasurementServicer):
-    def LogMeasurement(self, request, context):
-        # Step 1: Define Metadata
-        METADATA = {
-            Fields.ProgramName: "Your Program Name",
-        }
-
-        # Step 2: Initialize TestRun
-        run = TestRun(
-            metadata=METADATA, 
-            folder_path=os.path.join(os.getcwd(), "log_folder"), 
-            file_name="log_file"
-        )
-        data = run.Metadata()
-
-        # Step 3: Add Metadata and Parameters
-        for pin_index, pin in enumerate(request.measured_pins):
-            data.add_string_parameter("Pin", pin)
-            
-            measurement = MeasurementDetails(
-                name="MeasurementName",
-                spec_id="SpecID",
-                value=request.measurement_values[pin_index],
-                unit="Unit",
-            )
-            
-            data.add_additional_info("Current", str(request.current[pin_index]) + "A")
-            data.add_additional_info("Logged Time", str(datetime.now().strftime("%Y-%m-%d:%H:%M:%S")))
-            
-            # Step 4: Log Measurements
-            run.log_measurement(measurement)
-        
-        # Step 5: Clean Up
-        data.remove_all_metadata()
-        data.remove_all_parameters()
-        data.remove_all_additional_info()
-
-        run.close_datalog()
-        print(f"Received measurement: {request}")
-
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     custom_measurement_pb2_grpc.add_CustomServiceServicer_to_server(CustomService(), server)
-    server.add_insecure_port('[::]:50051')
+    port = server.add_insecure_port('[::]:0')
     server.start()
     server.wait_for_termination()
 
+    discovery_client = DiscoveryClient()
+    service_location = ServiceLocation("localhost", f'{port}', "")
+
+    service_info = ServiceInfo(
+        service_class="ni.measurementlink.custom.v1.CustomService",
+        scription_url="",
+        provided_interfaces=["ni.measurementlink.custom.v1.CustomService"],
+        display_name="CustomService")
+
+    registration_id = discovery_client.register_service(
+        service_info=service_info,
+        service_location=service_location)
+    
+    _ = input("Press enter to stop the server.")
+    discovery_client.unregister_service(registration_id)
+
+    server.stop(grace=5)
 if __name__ == '__main__':
     serve()
 ```

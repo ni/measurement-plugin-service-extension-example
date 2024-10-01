@@ -1,7 +1,7 @@
 from grpc.framework.foundation import logging_pool
 import grpc
 import csv
-from stubs.log_measurement_pb2 import LogMeasurementResponse
+from stubs.log_measurement_pb2 import LogResponse
 from stubs.log_measurement_pb2_grpc import LogMeasurementServicer, add_LogMeasurementServicer_to_server
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
 from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
@@ -23,7 +23,7 @@ class MeasurementService(LogMeasurementServicer):
             writer.writerow([request])
 
         print(f"Received measurement: {request}")
-        return LogMeasurementResponse()
+        return LogResponse()
 
 def serve():
     """Starts the gRPC server and registers the service with the service registry."""

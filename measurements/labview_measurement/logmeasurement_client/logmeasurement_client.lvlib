@@ -9,28 +9,28 @@
 
 </Property>
 	<Item Name="RPC Messages" Type="Folder">
-		<Item Name="external_driver_wrapper_LogMeasurementResponse" Type="Folder">
-			<Item Name="external_driver_wrapper_LogMeasurementResponse.ctl" Type="VI" URL="../RPC Messages/external_driver_wrapper_LogMeasurementResponse.ctl"/>
-			<Item Name="FlatToRichexternal_driver_wrapper_LogMeasurementResponse.vi" Type="VI" URL="../RPC Messages/FlatToRichexternal_driver_wrapper_LogMeasurementResponse.vi"/>
-			<Item Name="RichToFlatexternal_driver_wrapper_LogMeasurementResponse.vi" Type="VI" URL="../RPC Messages/RichToFlatexternal_driver_wrapper_LogMeasurementResponse.vi"/>
+		<Item Name="logging_service_LogRequest" Type="Folder">
+			<Item Name="logging_service_LogRequest.ctl" Type="VI" URL="../RPC Messages/logging_service_LogRequest.ctl"/>
+			<Item Name="FlatToRichlogging_service_LogRequest.vi" Type="VI" URL="../RPC Messages/FlatToRichlogging_service_LogRequest.vi"/>
+			<Item Name="RichToFlatlogging_service_LogRequest.vi" Type="VI" URL="../RPC Messages/RichToFlatlogging_service_LogRequest.vi"/>
 		</Item>
-		<Item Name="external_driver_wrapper_LogMeasurementRequest" Type="Folder">
-			<Item Name="external_driver_wrapper_LogMeasurementRequest.ctl" Type="VI" URL="../RPC Messages/external_driver_wrapper_LogMeasurementRequest.ctl"/>
-			<Item Name="FlatToRichexternal_driver_wrapper_LogMeasurementRequest.vi" Type="VI" URL="../RPC Messages/FlatToRichexternal_driver_wrapper_LogMeasurementRequest.vi"/>
-			<Item Name="RichToFlatexternal_driver_wrapper_LogMeasurementRequest.vi" Type="VI" URL="../RPC Messages/RichToFlatexternal_driver_wrapper_LogMeasurementRequest.vi"/>
+		<Item Name="logging_service_LogResponse" Type="Folder">
+			<Item Name="logging_service_LogResponse.ctl" Type="VI" URL="../RPC Messages/logging_service_LogResponse.ctl"/>
+			<Item Name="FlatToRichlogging_service_LogResponse.vi" Type="VI" URL="../RPC Messages/FlatToRichlogging_service_LogResponse.vi"/>
+			<Item Name="RichToFlatlogging_service_LogResponse.vi" Type="VI" URL="../RPC Messages/RichToFlatlogging_service_LogResponse.vi"/>
 		</Item>
-		<Item Name="external_driver_wrapper_LogMeasurementResponse_Flat" Type="Folder">
-			<Item Name="external_driver_wrapper_LogMeasurementResponse_Flat.ctl" Type="VI" URL="../RPC Messages/external_driver_wrapper_LogMeasurementResponse_Flat.ctl"/>
+		<Item Name="logging_service_LogRequest_Flat" Type="Folder">
+			<Item Name="logging_service_LogRequest_Flat.ctl" Type="VI" URL="../RPC Messages/logging_service_LogRequest_Flat.ctl"/>
 		</Item>
-		<Item Name="external_driver_wrapper_LogMeasurementRequest_Flat" Type="Folder">
-			<Item Name="external_driver_wrapper_LogMeasurementRequest_Flat.ctl" Type="VI" URL="../RPC Messages/external_driver_wrapper_LogMeasurementRequest_Flat.ctl"/>
+		<Item Name="logging_service_LogResponse_Flat" Type="Folder">
+			<Item Name="logging_service_LogResponse_Flat.ctl" Type="VI" URL="../RPC Messages/logging_service_LogResponse_Flat.ctl"/>
 		</Item>
 		<Item Name="Register gRPC Messages.vi" Type="VI" URL="../RPC Messages/Register gRPC Messages.vi"/>
 	</Item>
 	<Item Name="RPC Service" Type="Folder">
 		<Item Name="LogMeasurement" Type="Folder">
-			<Item Name="LogMeasurement LogMeasurement" Type="Folder">
-				<Item Name="LogMeasurement LogMeasurement.vi" Type="VI" URL="../RPC Service/LogMeasurement/LogMeasurement LogMeasurement.vi"/>
+			<Item Name="LogMeasurement Log" Type="Folder">
+				<Item Name="LogMeasurement Log.vi" Type="VI" URL="../RPC Service/LogMeasurement/LogMeasurement Log.vi"/>
 			</Item>
 		</Item>
 	</Item>

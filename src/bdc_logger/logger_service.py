@@ -2,7 +2,7 @@ from grpc.framework.foundation import logging_pool
 from datetime import datetime
 import os
 import grpc
-from stubs.log_measurement_pb2 import LogMeasurementResponse
+from stubs.log_measurement_pb2 import LogResponse
 from stubs.log_measurement_pb2_grpc import LogMeasurementServicer, add_LogMeasurementServicer_to_server
 from bdcdatalogger import Fields, MeasurementDetails, TestRun
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
@@ -51,7 +51,7 @@ class MeasurementService(LogMeasurementServicer):
 
         run.close_datalog()
         print(f"Received measurement: {request}")
-        return LogMeasurementResponse()
+        return LogResponse()
 
 def serve():
     server = grpc.server(logging_pool.pool(max_workers=10))

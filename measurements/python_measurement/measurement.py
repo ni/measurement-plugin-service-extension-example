@@ -18,7 +18,7 @@ import ni_measurement_plugin_sdk_service as nims
 import nidcpower
 import nidcpower.session
 import stubs.log_measurement_pb2_grpc
-from stubs.log_measurement_pb2 import LogMeasurementRequest,LogMeasurementResponse
+from stubs.log_measurement_pb2 import LogRequest,LogResponse
 from _helpers import configure_logging, verbosity_option
 
 _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE = -1074116059
@@ -155,7 +155,7 @@ def measure(
     in_compliance=[measurement.in_compliance for measurement in measurements]
 
     # Create and send a LogMeasurement request
-    stub.LogMeasurement(LogMeasurementRequest(
+    stub.Log(LogRequest(
         measured_sites=measured_sites,
         measured_pins=measured_pins,
         voltage=voltage,

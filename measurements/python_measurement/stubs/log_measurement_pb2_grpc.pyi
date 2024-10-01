@@ -19,23 +19,23 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 class LogMeasurementStub:
     def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
-    LogMeasurement: grpc.UnaryUnaryMultiCallable[
-        log_measurement_pb2.LogMeasurementRequest,
-        log_measurement_pb2.LogMeasurementResponse,
+    Log: grpc.UnaryUnaryMultiCallable[
+        log_measurement_pb2.LogRequest,
+        log_measurement_pb2.LogResponse,
     ]
 
 class LogMeasurementAsyncStub:
-    LogMeasurement: grpc.aio.UnaryUnaryMultiCallable[
-        log_measurement_pb2.LogMeasurementRequest,
-        log_measurement_pb2.LogMeasurementResponse,
+    Log: grpc.aio.UnaryUnaryMultiCallable[
+        log_measurement_pb2.LogRequest,
+        log_measurement_pb2.LogResponse,
     ]
 
 class LogMeasurementServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    def LogMeasurement(
+    def Log(
         self,
-        request: log_measurement_pb2.LogMeasurementRequest,
+        request: log_measurement_pb2.LogRequest,
         context: _ServicerContext,
-    ) -> typing.Union[log_measurement_pb2.LogMeasurementResponse, collections.abc.Awaitable[log_measurement_pb2.LogMeasurementResponse]]: ...
+    ) -> typing.Union[log_measurement_pb2.LogResponse, collections.abc.Awaitable[log_measurement_pb2.LogResponse]]: ...
 
 def add_LogMeasurementServicer_to_server(servicer: LogMeasurementServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

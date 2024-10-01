@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package external_driver_wrapper;
+package logging_service;
 
 service LogMeasurement {
   rpc LogMeasurement(LogMeasurementRequest) returns (LogMeasurementResponse);

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import stubs.log_measurement_pb2 as log__measurement__pb2
+import log_measurement_pb2 as log__measurement__pb2
 
 
 class LogMeasurementStub(object):
@@ -14,17 +14,17 @@ class LogMeasurementStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.LogMeasurement = channel.unary_unary(
-                '/external_driver_wrapper.LogMeasurement/LogMeasurement',
-                request_serializer=log__measurement__pb2.LogMeasurementRequest.SerializeToString,
-                response_deserializer=log__measurement__pb2.LogMeasurementResponse.FromString,
+        self.Log = channel.unary_unary(
+                '/logging_service.LogMeasurement/Log',
+                request_serializer=log__measurement__pb2.LogRequest.SerializeToString,
+                response_deserializer=log__measurement__pb2.LogResponse.FromString,
                 )
 
 
 class LogMeasurementServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def LogMeasurement(self, request, context):
+    def Log(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,14 +33,14 @@ class LogMeasurementServicer(object):
 
 def add_LogMeasurementServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'LogMeasurement': grpc.unary_unary_rpc_method_handler(
-                    servicer.LogMeasurement,
-                    request_deserializer=log__measurement__pb2.LogMeasurementRequest.FromString,
-                    response_serializer=log__measurement__pb2.LogMeasurementResponse.SerializeToString,
+            'Log': grpc.unary_unary_rpc_method_handler(
+                    servicer.Log,
+                    request_deserializer=log__measurement__pb2.LogRequest.FromString,
+                    response_serializer=log__measurement__pb2.LogResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'external_driver_wrapper.LogMeasurement', rpc_method_handlers)
+            'logging_service.LogMeasurement', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -49,7 +49,7 @@ class LogMeasurement(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def LogMeasurement(request,
+    def Log(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class LogMeasurement(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/external_driver_wrapper.LogMeasurement/LogMeasurement',
-            log__measurement__pb2.LogMeasurementRequest.SerializeToString,
-            log__measurement__pb2.LogMeasurementResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/logging_service.LogMeasurement/Log',
+            log__measurement__pb2.LogRequest.SerializeToString,
+            log__measurement__pb2.LogResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

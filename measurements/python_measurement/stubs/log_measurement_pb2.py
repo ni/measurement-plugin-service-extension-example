@@ -13,17 +13,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15log_measurement.proto\x12\x17\x65xternal_driver_wrapper\"\x18\n\x16LogMeasurementResponse\"\x7f\n\x15LogMeasurementRequest\x12\x16\n\x0emeasured_sites\x18\x01 \x03(\x05\x12\x15\n\rmeasured_pins\x18\x02 \x03(\t\x12\x0f\n\x07voltage\x18\x03 \x03(\x02\x12\x0f\n\x07\x63urrent\x18\x04 \x03(\x02\x12\x15\n\rin_compliance\x18\x05 \x03(\x08\x32\x83\x01\n\x0eLogMeasurement\x12q\n\x0eLogMeasurement\x12..external_driver_wrapper.LogMeasurementRequest\x1a/.external_driver_wrapper.LogMeasurementResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15log_measurement.proto\x12\x0flogging_service\"t\n\nLogRequest\x12\x16\n\x0emeasured_sites\x18\x01 \x03(\x05\x12\x15\n\rmeasured_pins\x18\x02 \x03(\t\x12\x0f\n\x07voltage\x18\x03 \x03(\x02\x12\x0f\n\x07\x63urrent\x18\x04 \x03(\x02\x12\x15\n\rin_compliance\x18\x05 \x03(\x08\"\r\n\x0bLogResponse2R\n\x0eLogMeasurement\x12@\n\x03Log\x12\x1b.logging_service.LogRequest\x1a\x1c.logging_service.LogResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'log_measurement_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_LOGMEASUREMENTRESPONSE']._serialized_start=50
-  _globals['_LOGMEASUREMENTRESPONSE']._serialized_end=74
-  _globals['_LOGMEASUREMENTREQUEST']._serialized_start=76
-  _globals['_LOGMEASUREMENTREQUEST']._serialized_end=203
-  _globals['_LOGMEASUREMENT']._serialized_start=206
-  _globals['_LOGMEASUREMENT']._serialized_end=337
+  _globals['_LOGREQUEST']._serialized_start=42
+  _globals['_LOGREQUEST']._serialized_end=158
+  _globals['_LOGRESPONSE']._serialized_start=160
+  _globals['_LOGRESPONSE']._serialized_end=173
+  _globals['_LOGMEASUREMENT']._serialized_start=175
+  _globals['_LOGMEASUREMENT']._serialized_end=257
 # @@protoc_insertion_point(module_scope)
