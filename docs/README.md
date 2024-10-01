@@ -54,8 +54,8 @@ from concurrent import futures
 import custom_measurement_pb2
 import custom_measurement_pb2_grpc
 
-class CustomService(custom_measurement_pb2_grpc.CustomServiceServicer) -> ActionResponse:
-    def PerformAction(self, request, context):
+class CustomService(custom_measurement_pb2_grpc.CustomServiceServicer):
+    def PerformAction(self, request, context) -> ActionResponse:
         print(f"Received action: {request.action} with parameters: {request.parameters}")
         # Implement your custom logic here
         action = request.action
@@ -92,7 +92,7 @@ def serve():
 
     service_info = ServiceInfo(
         service_class="ni.measurementlink.custom.v1.CustomService",
-        scription_url="",
+        description_url="",
         provided_interfaces=["ni.measurementlink.custom.v1.CustomService"],
         display_name="CustomService")
 
@@ -104,6 +104,7 @@ def serve():
     discovery_client.unregister_service(registration_id)
 
     server.stop(grace=5)
+
 if __name__ == '__main__':
     serve()
 ```
@@ -121,10 +122,18 @@ import custom_measurement_pb2
 import custom_measurement_pb2_grpc
 
 def run():
-        with grpc.insecure_channel('localhost:50051') as channel:
-                stub = custom_measurement_pb2_grpc.DataLoggingServiceStub(channel)
-                response = stub.LogData(custom_measurement_pb2.LogRequest(data='Sample data'))
-                print(f"Log success: {response.success}")
+    GRPC_SERVICE_INTERFACE_NAME = "ni.measurementlink.custom.v1.CustomService"
+    GRPC_SERVICE_CLASS = "ni.measurementlink.custom.v1.CustomService"
+
+    discovery_client = DiscoveryClient()
+    
+    service_location = discovery_client.resolve_service(
+    provided_interface=GRPC_SERVICE_INTERFACE_NAME,
+    service_class=GRPC_SERVICE_CLASS)
+
+    with grpc.insecure_channel(service_location.insecure_address) as channel:
+            stub = custom_measurement_pb2_grpc.CustomServiceStub(channel)
+            response = stub.PerformAction(custom_measurement_pb2.ActionRequest(action='example_action'))
 
 if __name__ == '__main__':
         run()
