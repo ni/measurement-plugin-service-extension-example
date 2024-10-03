@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import logging
 import pathlib
 import sys
 import threading
@@ -27,6 +26,8 @@ _NIDCPOWER_TIMEOUT_ERROR_CODES = [
     _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE,
     _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE,
 ]
+GRPC_LOGGER_SERVICE_INTERFACE_NAME = "ni.measurementlink.logger.v1.LogService"
+GRPC_LOGGER_SERVICE_CLASS = "ni.measurementlink.logger.v1.LogService"
 
 script_or_exe = sys.executable if getattr(sys, "frozen", False) else __file__
 service_directory = pathlib.Path(script_or_exe).resolve().parent
@@ -38,6 +39,20 @@ measurement_service = nims.MeasurementService(
         service_directory / "NIDCPowerSourceDCVoltageUI.vi",
     ],
 )
+
+# Initialize the discovery client
+discovery_client = DiscoveryClient()
+
+# Resolve the service location using the discovery client
+logger_service_location = discovery_client.resolve_service(
+provided_interface=GRPC_LOGGER_SERVICE_INTERFACE_NAME,
+logger_service_class=GRPC_LOGGER_SERVICE_CLASS)
+
+# Create a gRPC channel to the resolved service location
+logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
+
+# Create a gRPC stub for the Logger service
+stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = logger_service_channel)
 
 if TYPE_CHECKING:
     # The nidcpower Measurement named tuple doesn't support type annotations:
@@ -75,7 +90,6 @@ def measure(
     source_delay: float,
 ) -> Tuple[List[int], List[str], List[float], List[float], List[bool]]:
     """Source and measure a DC voltage with an NI SMU."""
-    logging.info("Executing measurement: pin_names=%s voltage_level=%g", pin_names, voltage_level)
 
     cancellation_event = threading.Event()
     measurement_service.context.add_cancel_callback(cancellation_event.set)
@@ -132,23 +146,6 @@ def measure(
                 for session_info in session_infos:
                     session_info.session.channels[session_info.channel_list].reset()
 
-    GRPC_SERVICE_INTERFACE_NAME = "ni.measurementlink.logger.v1.LogService"
-    GRPC_SERVICE_CLASS = "ni.measurementlink.logger.v1.LogService"
-
-    # Initialize the discovery client
-    discovery_client = DiscoveryClient()
-
-    # Resolve the service location using the discovery client
-    service_location = discovery_client.resolve_service(
-    provided_interface=GRPC_SERVICE_INTERFACE_NAME,
-    service_class=GRPC_SERVICE_CLASS)
-
-    # Create a gRPC channel to the resolved service location
-    channel = grpc.insecure_channel(service_location.insecure_address)
-
-    # Create a gRPC stub for the LogMeasurement service
-    stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = channel)
-
     # Extract measurement data
     voltage=[measurement.voltage for measurement in measurements]
     current=[measurement.current for measurement in measurements]
@@ -162,8 +159,6 @@ def measure(
         current=current,
         in_compliance=in_compliance,))
 
-    _log_measurements(measured_sites, measured_pins, measurements)
-    logging.info("Completed measurement")
     return (
         measured_sites,
         measured_pins,
@@ -205,19 +200,6 @@ def _wait_for_event(
             if e.code in _NIDCPOWER_TIMEOUT_ERROR_CODES:
                 pass
             raise
-
-
-def _log_measurements(
-    measured_sites: Iterable[int],
-    measured_pins: Iterable[str],
-    measured_values: Iterable[_Measurement],
-) -> None:
-    """Log the measured values."""
-    for site, pin, measurement in zip(measured_sites, measured_pins, measured_values):
-        logging.info("site%s/%s:", site, pin)
-        logging.info("  Voltage: %g V", measurement.voltage)
-        logging.info("  Current: %g A", measurement.current)
-        logging.info("  In compliance: %s", str(measurement.in_compliance))
 
 
 @click.command
