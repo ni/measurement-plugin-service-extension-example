@@ -1,17 +1,20 @@
 # Custom Measurement Plugin Services
 
-This README provides a step-by-step guide to create a custom service. The process involves creating
-a proto file, generating stubs, establishing a connection, and using the custom service in
-different measurements.
+This README provides a step-by-step guide to integrate custom services into a measurement plug-in.
+The process involves defining a service, generating stubs, establishing a connection, and using
+the custom services in various measurements.
 
 ## Steps
 
-- Define the service.
+- Define the custom service and rpc methods under the service definition specifying the request and
+  response types.
   - Example:
   [Logger service proto](../src/csv_logger/log_measurement.proto).
 - Generate server interfaces from the service definition. Implement the servicer interface generated
   from the service definition, ensuring that the method implementation is complete.
 - Set up a gRPC server to handle client requests and execute the service's tasks.
+- Register the server location with the discovery service using the discovery client which ensures the
+  custom services available to public.
   - Example:
   [Logger service implementation](../src/csv_logger/logger_service.py).
 - Establish the connection to communicate with the service methods.
@@ -28,22 +31,22 @@ different measurements.
 - Generate client interfaces from the the .proto file to communicate with the service methods using
   the `gRPC Server-Client [2] - Code Generator`.
 
-!["gRPC Server-Client [2] - Code Generator](gRPC_server_client_generator.JPG)
+  !["gRPC Server-Client [2] - Code Generator](gRPC_server_client_generator.JPG)
 
-- Define Service Interface and Class Names:
-  - Provide the gRPC service interface and class names as inputs to the Resolve Service API to
-    retrieve the port where the custom service is running.
+- Establish the connection to communicate with the service methods.
+  - Define Service Interface and Class Names:
+    - Provide the gRPC service interface and class names as inputs to the Resolve Service API to
+      retrieve the port where the custom service is running.
 
-!["Get_Port"](define_service.png)
+    !["Get_Port"](define_service.png)
 
-- Create a Discovery Client:
-  - Instantiate a DiscoveryClient to resolve the service location.
+  - Create a Discovery Client:
+    - Instantiate a DiscoveryClient to resolve the service location.
 
-!["Create_Client"](create_client.png)
+    !["Create_Client"](create_client.png)
 
-- The client calls the Service APIs by obtaining the request models from the measurement service.
+  - The client calls the Service APIs by obtaining the request models from the measurement service.
 
 ## Conclusion
 
-This guide covered creating a proto file, generating stubs, implementing the service, establishing a
-connection, and using the custom service in different measurements.
+This guide covered steps to integrate the custom service in different measurements.

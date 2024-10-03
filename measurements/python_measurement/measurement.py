@@ -45,8 +45,8 @@ discovery_client = DiscoveryClient()
 
 # Resolve the service location using the discovery client
 logger_service_location = discovery_client.resolve_service(
-provided_interface=GRPC_LOGGER_SERVICE_INTERFACE_NAME,
-logger_service_class=GRPC_LOGGER_SERVICE_CLASS)
+provided_interface=str(GRPC_LOGGER_SERVICE_INTERFACE_NAME),
+service_class=str(GRPC_LOGGER_SERVICE_CLASS))
 
 # Create a gRPC channel to the resolved service location
 logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
