@@ -4,10 +4,10 @@ isort:skip_file
 """
 
 import abc
-import bdc_logger_pb2
 import collections.abc
 import grpc
 import grpc.aio
+import stubs.log_measurement_pb2 as log_measurement_pb2
 import typing
 
 _T = typing.TypeVar("_T")
@@ -20,22 +20,22 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 class LogMeasurementStub:
     def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
     Log: grpc.UnaryUnaryMultiCallable[
-        bdc_logger_pb2.LogRequest,
-        bdc_logger_pb2.LogResponse,
+        log_measurement_pb2.LogRequest,
+        log_measurement_pb2.LogResponse,
     ]
 
 class LogMeasurementAsyncStub:
     Log: grpc.aio.UnaryUnaryMultiCallable[
-        bdc_logger_pb2.LogRequest,
-        bdc_logger_pb2.LogResponse,
+        log_measurement_pb2.LogRequest,
+        log_measurement_pb2.LogResponse,
     ]
 
 class LogMeasurementServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def Log(
         self,
-        request: bdc_logger_pb2.LogRequest,
+        request: log_measurement_pb2.LogRequest,
         context: _ServicerContext,
-    ) -> typing.Union[bdc_logger_pb2.LogResponse, collections.abc.Awaitable[bdc_logger_pb2.LogResponse]]: ...
+    ) -> typing.Union[log_measurement_pb2.LogResponse, collections.abc.Awaitable[log_measurement_pb2.LogResponse]]: ...
 
 def add_LogMeasurementServicer_to_server(servicer: LogMeasurementServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

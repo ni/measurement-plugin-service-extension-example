@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SourceFile Checksum="8407B27A69434CE770DB42B7AF27B7ED2604517C37A027B7F45CD284A07C435537AC57E099CF5D2BEC33F689E27D01A8330070805964CD3B3355A16FF6D55695" Timestamp="1DB1633D4016B7B" xmlns="http://www.ni.com/PlatformFramework">
+<SourceFile Checksum="63BA1BCD26C5F7A5F0B63E6825CF326DE2B94937092CEC05DC97A7C877FABA931D5A6AB05EE16F79AEFF46B7EADDAA7F859EF0C705F8530BDFAD7DC46AA66967" Timestamp="1DB16470F0DD3C1" xmlns="http://www.ni.com/PlatformFramework">
 	<SourceModelFeatureSet>
 		<ParsableNamespace AssemblyFileVersion="9.13.0.50111" FeatureSetName="Configuration Based Software Core" Name="http://www.ni.com/ConfigurationBasedSoftware.Core" OldestCompatibleVersion="6.3.0.49152" Version="9.8.1.49152" />
 		<ParsableNamespace AssemblyFileVersion="9.13.0.50111" FeatureSetName="LabVIEW Controls" Name="http://www.ni.com/Controls.LabVIEW.Design" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
@@ -23,12 +23,16 @@
 				<Label Height="[float]16" Id="8180acb567174824aa1b4126e857ad96" LabelOwner="[UIModel]47497842bba8443594fb99159509f596" Left="[float]20" Text="[string]Source delay (s)" Top="[float]216" Width="[float]84" xmlns="http://www.ni.com/PanelCommon" />
 			</ScreenSurfaceCanvas>
 			<Label Height="[float]16" Id="2f53b6c7f87b41879b8d84f4fb87c844" LabelOwner="[UIModel]4b93ed01d79049dc8d2c3ef426384b35" Left="[float]40" Text="[string]Configuration" Top="[float]80" Width="[float]73" xmlns="http://www.ni.com/PanelCommon" />
-			<ChannelPinSelector AllowUndefinedValues="[bool]True" BaseName="[string]Pin" Channel="[string]{5f88d1ec-4b12-4bf9-b28f-707b534a0575}/Configuration/pin_name" DataType="[Type]String" Enabled="[bool]True" Height="[float]24" Id="40b7c7768512477fb2d939ac81f1bb10" IsLabelBoundToChannel="[bool]False" Label="[UIModel]2104dc3428074997846caee906febdd6" Left="[float]40" MultipleSelectionMode="[MultipleSelectionModes]List" SelectedResource="[NI_Core_DataValues_TagRefnum]Pin1" Top="[float]36" Width="[float]200" xmlns="http://www.ni.com/InstrumentFramework/ScreenDocument" />
+			<ChannelPinSelector AllowUndefinedValues="[bool]True" BaseName="[string]Pin" Channel="[string]{5f88d1ec-4b12-4bf9-b28f-707b534a0575}/Configuration/pin_name" DataType="[Type]String" Enabled="[bool]True" Height="[float]24" Id="40b7c7768512477fb2d939ac81f1bb10" IsLabelBoundToChannel="[bool]False" Label="[UIModel]2104dc3428074997846caee906febdd6" Left="[float]40" SelectedResource="[NI_Core_DataValues_TagRefnum]Pin1" Top="[float]36" Width="[float]200" xmlns="http://www.ni.com/InstrumentFramework/ScreenDocument" />
 			<Label Height="[float]16" Id="2104dc3428074997846caee906febdd6" LabelOwner="[UIModel]40b7c7768512477fb2d939ac81f1bb10" Left="[float]40" Text="[string]Pin name" Top="[float]16" Width="[float]50" xmlns="http://www.ni.com/PanelCommon" />
 			<ChannelNumericText AdaptsToType="[bool]True" BaseName="[string]Numeric" Channel="[string]{5f88d1ec-4b12-4bf9-b28f-707b534a0575}/Output/voltage_measurement" Height="[float]51" Id="21d9ee706d864ab3a9952712f69a355d" IsLabelBoundToChannel="[bool]False" IsReadOnly="[bool]True" Label="[UIModel]f388223259744c2aa6face44dfb3731c" Left="[float]314" MinHeight="[float]51" TabIndex="[int]0" Top="[float]175" UnitAnnotation="[string]" ValueFormatter="[string]DisplayFormat=Automatic:Digits=7:DigitDisplayType=SignificantDigits:MinimumFieldWidth=0:AlwaysShowSign=False:ShowThousandsSeparator=False" ValueType="[Type]Double" Width="[float]164">
 				<FontSetting FontFamily="Segoe UI" FontSize="24" Id="b22159a9d73f4193818f231961942524" xmlns="http://www.ni.com/PlatformFramework" />
 			</ChannelNumericText>
 			<Label Height="[float]16" Id="f388223259744c2aa6face44dfb3731c" LabelOwner="[UIModel]21d9ee706d864ab3a9952712f69a355d" Left="[float]314" Text="[string]Measured voltage" Top="[float]155" Width="[float]96" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelNumericText AdaptsToType="[bool]True" BaseName="[string]Numeric" Channel="[string]{5f88d1ec-4b12-4bf9-b28f-707b534a0575}/Output/current_measurement" Height="[float]51" Id="dce479459de644b4a87a2de8dc33d4dc" IsLabelBoundToChannel="[bool]False" IsReadOnly="[bool]True" Label="[UIModel]a90f30579a9f4b97a725ad6e91526770" Left="[float]314" MinHeight="[float]51" TabIndex="[int]1" Top="[float]283" UnitAnnotation="[string]" ValueFormatter="[string]DisplayFormat=Automatic:Digits=7:DigitDisplayType=SignificantDigits:MinimumFieldWidth=0:AlwaysShowSign=False:ShowThousandsSeparator=False" ValueType="[Type]Double" Width="[float]164">
+				<FontSetting FontFamily="Segoe UI" FontSize="24" Id="23a82e9b4db445a587a86d7b55c04c04" xmlns="http://www.ni.com/PlatformFramework" />
+			</ChannelNumericText>
+			<Label Height="[float]16" Id="a90f30579a9f4b97a725ad6e91526770" LabelOwner="[UIModel]dce479459de644b4a87a2de8dc33d4dc" Left="[float]314" Text="[string]Measured current" Top="[float]263" Width="[float]94" xmlns="http://www.ni.com/PanelCommon" />
 		</ScreenSurface>
 	</Screen>
 </SourceFile>

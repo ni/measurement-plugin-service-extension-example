@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import bdc_logger_pb2 as bdc__logger__pb2
+import stubs.log_measurement_pb2 as log__measurement__pb2
 
 
 class LogMeasurementStub(object):
@@ -15,9 +15,9 @@ class LogMeasurementStub(object):
             channel: A grpc.Channel.
         """
         self.Log = channel.unary_unary(
-                '/bdc_logger.LogMeasurement/Log',
-                request_serializer=bdc__logger__pb2.LogRequest.SerializeToString,
-                response_deserializer=bdc__logger__pb2.LogResponse.FromString,
+                '/logging_service.LogMeasurement/Log',
+                request_serializer=log__measurement__pb2.LogRequest.SerializeToString,
+                response_deserializer=log__measurement__pb2.LogResponse.FromString,
                 )
 
 
@@ -35,12 +35,12 @@ def add_LogMeasurementServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Log': grpc.unary_unary_rpc_method_handler(
                     servicer.Log,
-                    request_deserializer=bdc__logger__pb2.LogRequest.FromString,
-                    response_serializer=bdc__logger__pb2.LogResponse.SerializeToString,
+                    request_deserializer=log__measurement__pb2.LogRequest.FromString,
+                    response_serializer=log__measurement__pb2.LogResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'bdc_logger.LogMeasurement', rpc_method_handlers)
+            'logging_service.LogMeasurement', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -59,8 +59,8 @@ class LogMeasurement(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bdc_logger.LogMeasurement/Log',
-            bdc__logger__pb2.LogRequest.SerializeToString,
-            bdc__logger__pb2.LogResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/logging_service.LogMeasurement/Log',
+            log__measurement__pb2.LogRequest.SerializeToString,
+            log__measurement__pb2.LogResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

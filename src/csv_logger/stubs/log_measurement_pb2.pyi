@@ -6,18 +6,18 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class LogRequest(_message.Message):
-    __slots__ = ["measured_sites", "measured_pins", "voltage", "current", "in_compliance"]
+    __slots__ = ["measured_sites", "measured_pins", "voltage_measurements", "current_measurements", "in_compliance"]
     MEASURED_SITES_FIELD_NUMBER: _ClassVar[int]
     MEASURED_PINS_FIELD_NUMBER: _ClassVar[int]
-    VOLTAGE_FIELD_NUMBER: _ClassVar[int]
-    CURRENT_FIELD_NUMBER: _ClassVar[int]
+    VOLTAGE_MEASUREMENTS_FIELD_NUMBER: _ClassVar[int]
+    CURRENT_MEASUREMENTS_FIELD_NUMBER: _ClassVar[int]
     IN_COMPLIANCE_FIELD_NUMBER: _ClassVar[int]
     measured_sites: _containers.RepeatedScalarFieldContainer[int]
     measured_pins: _containers.RepeatedScalarFieldContainer[str]
-    voltage: _containers.RepeatedScalarFieldContainer[float]
-    current: _containers.RepeatedScalarFieldContainer[float]
+    voltage_measurements: _containers.RepeatedScalarFieldContainer[float]
+    current_measurements: _containers.RepeatedScalarFieldContainer[float]
     in_compliance: _containers.RepeatedScalarFieldContainer[bool]
-    def __init__(self, measured_sites: _Optional[_Iterable[int]] = ..., measured_pins: _Optional[_Iterable[str]] = ..., voltage: _Optional[_Iterable[float]] = ..., current: _Optional[_Iterable[float]] = ..., in_compliance: _Optional[_Iterable[bool]] = ...) -> None: ...
+    def __init__(self, measured_sites: _Optional[_Iterable[int]] = ..., measured_pins: _Optional[_Iterable[str]] = ..., voltage_measurements: _Optional[_Iterable[float]] = ..., current_measurements: _Optional[_Iterable[float]] = ..., in_compliance: _Optional[_Iterable[bool]] = ...) -> None: ...
 
 class LogResponse(_message.Message):
     __slots__ = []

@@ -12,9 +12,9 @@ message LogRequest{
 
   repeated string measured_pins = 2;
 
-  repeated float voltage = 3;
+  repeated float voltage_measurements = 3;
 
-  repeated float current = 4;
+  repeated float current_measurements = 4;
 
   repeated bool in_compliance = 5;
 }

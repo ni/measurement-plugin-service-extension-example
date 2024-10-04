@@ -13,8 +13,8 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="logmeasurement_client" Type="Folder">
-			<Item Name="logmeasurement_client.lvlib" Type="Library" URL="../logmeasurement_client/logmeasurement_client.lvlib"/>
+		<Item Name="log_measurement_client" Type="Folder">
+			<Item Name="log_measurement_client.lvlib" Type="Library" URL="../log_measurement_client/log_measurement_client.lvlib"/>
 		</Item>
 		<Item Name="NIDCPowerSourceDCVoltage.lvlib" Type="Library" URL="../NI-DCPower Measurement/NIDCPowerSourceDCVoltage.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">

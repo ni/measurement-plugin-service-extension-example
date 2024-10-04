@@ -26,8 +26,8 @@ _NIDCPOWER_TIMEOUT_ERROR_CODES = [
     _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE,
     _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE,
 ]
-GRPC_LOGGER_SERVICE_INTERFACE_NAME = "ni.measurementlink.logger.v1.LogService"
-GRPC_LOGGER_SERVICE_CLASS = "ni.measurementlink.logger.v1.LogService"
+GRPC_LOGGER_SERVICE_INTERFACE_NAME = "user.defined.bdclogger.v1.LogService"
+GRPC_LOGGER_SERVICE_CLASS = "user.defined.bdclogger.v1.LogService"
 
 script_or_exe = sys.executable if getattr(sys, "frozen", False) else __file__
 service_directory = pathlib.Path(script_or_exe).resolve().parent
@@ -53,7 +53,7 @@ logger_service_location = discovery_client.resolve_service(
 logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
 
 # Create a gRPC stub for the Logger service
-stub = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel=logger_service_channel)
+logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = logger_service_channel)
 
 if TYPE_CHECKING:
     # The nidcpower Measurement named tuple doesn't support type annotations:
@@ -68,8 +68,8 @@ if TYPE_CHECKING:
 @measurement_service.register_measurement
 @measurement_service.configuration(
     "pin_name",
-    nims.DataType.IOResourceArray1D,
-    ["Pin1"],
+    nims.DataType.IOResource,
+    "Pin1",
     instrument_type=nims.session_management.INSTRUMENT_TYPE_NI_DCPOWER,
 )
 @measurement_service.configuration("voltage_level", nims.DataType.Double, 6.0)
@@ -78,6 +78,7 @@ if TYPE_CHECKING:
 @measurement_service.configuration("current_limit_range", nims.DataType.Double, 0.01)
 @measurement_service.configuration("source_delay", nims.DataType.Double, 0.0)
 @measurement_service.output("voltage_measurement", nims.DataType.Double)
+@measurement_service.output("current_measurement", nims.DataType.Double)
 def measure(
     pin_name: Iterable[str],
     voltage_level: float,
@@ -85,40 +86,54 @@ def measure(
     current_limit: float,
     current_limit_range: float,
     source_delay: float,
-) -> Tuple[float]:
+) -> Tuple[float, float]:
     """Source and measure a DC voltage with an NI SMU."""
 
     cancellation_event = threading.Event()
     measurement_service.context.add_cancel_callback(cancellation_event.set)
 
-    with measurement_service.context.reserve_sessions(pin_name) as reservation:
+    with measurement_service.context.reserve_session(pin_name) as reservation:
         with reservation.initialize_nidcpower_session() as session_info:
-                channels = session_info.session.channels[session_info.channel_list]
-                channels.source_mode = nidcpower.SourceMode.SINGLE_POINT
-                channels.output_function = nidcpower.OutputFunction.DC_VOLTAGE
-                channels.current_limit = current_limit
-                channels.voltage_level_range = voltage_level_range
-                channels.current_limit_range = current_limit_range
-                channels.source_delay = hightime.timedelta(seconds=source_delay)
-                channels.voltage_level = voltage_level
+            channels = session_info.session.channels[session_info.channel_list]
+            channels.source_mode = nidcpower.SourceMode.SINGLE_POINT
+            channels.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+            channels.current_limit = current_limit
+            channels.voltage_level_range = voltage_level_range
+            channels.current_limit_range = current_limit_range
+            channels.source_delay = hightime.timedelta(seconds=source_delay)
+            channels.voltage_level = voltage_level
 
-                channels.initiate()
+            with channels.initiate():
+                # Wait for the outputs to settle.
                 timeout = source_delay + 10.0
                 _wait_for_event(
-                    channels, cancellation_event, nidcpower.Event.SOURCE_COMPLETE, timeout
+                    channels,
+                    cancellation_event,
+                    nidcpower.Event.SOURCE_COMPLETE,
+                    timeout,
                 )
-                channels = session_info.session.channels[session_info.channel_list]
-                voltage_measurement: float = channels.measure(nidcpower.MeasurementTypes.VOLTAGE)
+
+                measured_site = session_info.channel_mappings[0].site
+                measured_pin = session_info.channel_mappings[0].pin_or_relay_name
+                in_compliance = session_info.session.channels[session_info.channel_mappings[0].channel].query_in_compliance()
+                measurement: _Measurement = channels.measure_multiple()[0]
+
 
     # Create and send a LogMeasurement request
-    stub.Log(
+    logger.Log(
         LogRequest(
-            measured_pin=pin_name,
-            voltage=voltage_measurement
+            measured_sites=[measured_site],
+            measured_pins=[measured_pin],
+            voltage_measurements=[measurement.voltage],
+            current_measurements=[measurement.current],
+            in_compliance=[in_compliance],
+
         )
     )
 
-    return (voltage_measurement,)
+    return (
+        measurement.voltage,
+        measurement.current,)
 
 def _wait_for_event(
     channels: nidcpower.session._SessionBase,
