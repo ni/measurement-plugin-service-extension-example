@@ -6,7 +6,6 @@ import pathlib
 import sys
 import threading
 import time
-from contextlib import ExitStack
 from typing import TYPE_CHECKING, Iterable, List, NamedTuple, Tuple
 
 import click
@@ -116,7 +115,8 @@ def measure(
                 measured_site = session_info.channel_mappings[0].site
                 measured_pin = session_info.channel_mappings[0].pin_or_relay_name
                 in_compliance = session_info.session.channels[session_info.channel_mappings[0].channel].query_in_compliance()
-                measurement: _Measurement = channels.measure_multiple()[0]
+                measurement: _Measurement = channels.measure_multiple()[0]            
+            channels.reset()
 
 
     # Create and send a LogMeasurement request
