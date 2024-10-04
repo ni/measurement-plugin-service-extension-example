@@ -7,31 +7,45 @@ the custom services in various measurements.
 ## Steps
 
 - Define the custom service and rpc methods under the service definition specifying the request and
-  response types.
+  response types. Refer to this
+  [link](https://grpc.io/docs/languages/python/basics/#defining-the-service) for
+  defining a service
   - Example:
   [Logger service proto](../src/csv_logger/log_measurement.proto).
 - Generate server interfaces from the service definition. Implement the servicer interface generated
-  from the service definition, ensuring that the method implementation is complete.
-- Set up a gRPC server to handle client requests and execute the service's tasks.
+  from the service definition, ensuring that the method implementation is complete.  Refer to this
+  [link](https://grpc.io/docs/languages/python/basics/#generating-grpc-interfaces-with-custom-package-path)
+  for generating server interfaces and implementing the servicer.
+- Set up a gRPC server to handle client requests and execute the service's tasks.  Refer to this
+  [link](https://grpc.io/docs/languages/python/basics/#starting-the-server) for
+  setting up the gRPC server.
 - Register the server location with the discovery service using the discovery client which ensures the
   custom services are available public to integrate with other services.
   - Example:
   [Logger service implementation](../src/csv_logger/logger_service.py).
 - Establish the connection to communicate with the service methods.
-  - Create stubs to call the service methods.
+  - Create stubs to call the service methods from the service definition.
   - Instantiate a discovery client to resolve the service location.
   - Create an insecure gRPC channel to the resolved service location.
   - Create a stub for the CustomService using the gRPC channel.
   - Call the service methods through the stubs.
+  - Refer to this
+  [link](https://grpc.io/docs/languages/python/basics/#creating-a-stub) for instructions on creating
+  a channel and stub.
   - Example:
   [Establish connection to custom logger service in python](../measurements/python_measurement/measurement.py).
 
 ## Integrating the the Custom Service in LabVIEW measurements
 
+- Install gRPC and LabVIEW gRPC Server and Client tool packages.
+  - Refer to this
+    [link](https://github.com/ni/grpc-labview/blob/master/docs/QuickStart.md#labview-grpc)
+    for installation instructions.
+
 - Generate client interfaces from the the .proto file to communicate with the service methods using
   the `gRPC Server-Client [2] - Code Generator`.
 
-  !["gRPC Server-Client [2] - Code Generator](gRPC_server_client_generator.JPG)
+  !["gRPC Server-Client [2] - Code Generator](gRPC_Server_Client_Generator.png)
 
 - Establish the connection to communicate with the service methods.
   - Define Service Interface and Class Names:

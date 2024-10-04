@@ -5,8 +5,7 @@ includes additional functionality to log measurement data using a custom logging
 
 ### Features
 
-- Includes a custom logging service that logs measurement data centrally. This functionality ensures
-  that all measurement data is easily accessible for monitoring and analysis.
+- Showcases the usage of a user-defined logger service that logs the measurement data.
 - Uses the NI-DCPower LabVIEW API
 - Pin-aware, supporting one session and multiple pins
   - Sources the same DC voltage level on all selected pin/site combinations
@@ -20,10 +19,9 @@ includes additional functionality to log measurement data using a custom logging
 
 ### NOTE
 
-TThe Logger Service is integrated with the Measurement Service. Therefore, starting the Measurement
-Service without the Logger Service will result in an error indicating that the Logger Service was
-not found. To avoid this, the Logger Service must be started and registered with the discovery
-service before it can be called from the Measurement Service.
+This example resolves the Logger service during its startup. Therefore, please ensure that the
+logger service is running before starting the measurement plug-in, else you will get an error
+indicating that the Logger service was not found.
 
 ### Required Driver Software
 

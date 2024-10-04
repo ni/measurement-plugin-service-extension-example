@@ -2925,7 +2925,7 @@
 																					<value/>
 																				</MessageType>
 																				<Name classname='Str'>
-																					<value>measurement_pin_names</value>
+																					<value>measurement_pin_name</value>
 																				</Name>
 																				<ArgumentValue classname='ExprValue'>
 																					<value/>

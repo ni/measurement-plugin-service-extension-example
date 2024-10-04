@@ -14,17 +14,17 @@ class LogMeasurementStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.LogMeasurement = channel.unary_unary(
-                '/bdc_logger.LogMeasurement/LogMeasurement',
-                request_serializer=bdc__logger__pb2.LogMeasurementRequest.SerializeToString,
-                response_deserializer=bdc__logger__pb2.LogMeasurementResponse.FromString,
+        self.Log = channel.unary_unary(
+                '/bdc_logger.LogMeasurement/Log',
+                request_serializer=bdc__logger__pb2.LogRequest.SerializeToString,
+                response_deserializer=bdc__logger__pb2.LogResponse.FromString,
                 )
 
 
 class LogMeasurementServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def LogMeasurement(self, request, context):
+    def Log(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,10 +33,10 @@ class LogMeasurementServicer(object):
 
 def add_LogMeasurementServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'LogMeasurement': grpc.unary_unary_rpc_method_handler(
-                    servicer.LogMeasurement,
-                    request_deserializer=bdc__logger__pb2.LogMeasurementRequest.FromString,
-                    response_serializer=bdc__logger__pb2.LogMeasurementResponse.SerializeToString,
+            'Log': grpc.unary_unary_rpc_method_handler(
+                    servicer.Log,
+                    request_deserializer=bdc__logger__pb2.LogRequest.FromString,
+                    response_serializer=bdc__logger__pb2.LogResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -49,7 +49,7 @@ class LogMeasurement(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def LogMeasurement(request,
+    def Log(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class LogMeasurement(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bdc_logger.LogMeasurement/LogMeasurement',
-            bdc__logger__pb2.LogMeasurementRequest.SerializeToString,
-            bdc__logger__pb2.LogMeasurementResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/bdc_logger.LogMeasurement/Log',
+            bdc__logger__pb2.LogRequest.SerializeToString,
+            bdc__logger__pb2.LogResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

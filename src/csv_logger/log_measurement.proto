@@ -7,16 +7,9 @@ service LogMeasurement {
 }
 
 message LogRequest{
+  string measured_pin = 1;
 
-  repeated int32 measured_sites = 1;
-
-  repeated string measured_pins = 2;
-
-  repeated float voltage = 3;
-
-  repeated float current = 4;
-
-  repeated bool in_compliance = 5;
+  float voltage = 2;
 }
 
 message LogResponse{}

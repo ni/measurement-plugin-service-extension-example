@@ -5,7 +5,11 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class LogRequest(_message.Message):
+class LogMeasurementResponse(_message.Message):
+    __slots__ = []
+    def __init__(self) -> None: ...
+
+class LogMeasurementRequest(_message.Message):
     __slots__ = ["measured_sites", "measured_pins", "voltage", "current", "in_compliance"]
     MEASURED_SITES_FIELD_NUMBER: _ClassVar[int]
     MEASURED_PINS_FIELD_NUMBER: _ClassVar[int]
@@ -18,7 +22,3 @@ class LogRequest(_message.Message):
     current: _containers.RepeatedScalarFieldContainer[float]
     in_compliance: _containers.RepeatedScalarFieldContainer[bool]
     def __init__(self, measured_sites: _Optional[_Iterable[int]] = ..., measured_pins: _Optional[_Iterable[str]] = ..., voltage: _Optional[_Iterable[float]] = ..., current: _Optional[_Iterable[float]] = ..., in_compliance: _Optional[_Iterable[bool]] = ...) -> None: ...
-
-class LogResponse(_message.Message):
-    __slots__ = []
-    def __init__(self) -> None: ...
