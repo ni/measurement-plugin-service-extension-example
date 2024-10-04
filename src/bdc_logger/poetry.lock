@@ -316,16 +316,6 @@ protobuf = ">=4.21.6,<5.0dev"
 setuptools = "*"
 
 [[package]]
-name = "hightime"
-version = "0.2.2"
-description = "Hightime Python API"
-optional = false
-python-versions = "*"
-files = [
-    {file = "hightime-0.2.2-py3-none-any.whl", hash = "sha256:5109a449bb3a75dbf305147777de71634c91b943d47cfbee18ed2f34a8307e0b"},
-]
-
-[[package]]
 name = "isort"
 version = "5.13.2"
 description = "A Python utility / library to sort Python imports."
@@ -466,25 +456,6 @@ pycodestyle = [
     {version = ">=2.11,<3.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
 ]
 toml = ">=0.10.1"
-
-[[package]]
-name = "nidcpower"
-version = "1.4.8"
-description = "NI-DCPower Python API"
-optional = false
-python-versions = "*"
-files = [
-    {file = "nidcpower-1.4.8-py3-none-any.whl", hash = "sha256:35b2094f66c594893e37fd50c07e8a4bb711f31f5bd4b0540f3e168e3376e0c1"},
-    {file = "nidcpower-1.4.8.tar.gz", hash = "sha256:6880777ec6138c4bad812339b96107f0351573bcf701391e4443b44021b2a392"},
-]
-
-[package.dependencies]
-grpcio = {version = ">=1.59.0,<2.0", optional = true, markers = "extra == \"grpc\""}
-hightime = ">=0.2.0"
-protobuf = {version = ">=4.21.6,<5.0", optional = true, markers = "extra == \"grpc\""}
-
-[package.extras]
-grpc = ["grpcio (>=1.59.0,<2.0)", "protobuf (>=4.21.6,<5.0)"]
 
 [[package]]
 name = "packaging"
@@ -697,13 +668,13 @@ files = [
 
 [[package]]
 name = "tomli"
-version = "2.0.1"
+version = "2.0.2"
 description = "A lil' TOML parser"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
-    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+    {file = "tomli-2.0.2-py3-none-any.whl", hash = "sha256:2ebe24485c53d303f690b0ec092806a085f07af5a5aa1464f3931eec36caaa38"},
+    {file = "tomli-2.0.2.tar.gz", hash = "sha256:d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed"},
 ]
 
 [[package]]
@@ -730,4 +701,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "53a1b3bc50f6206c0a4015a91ad4e9b9caf5f74e2dba5dc27fb26244ac67d0bf"
+content-hash = "e083bcfef6050ca914da006c1f19184f656a51596c14e8e62d5342570b20b48e"

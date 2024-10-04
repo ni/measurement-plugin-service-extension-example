@@ -32,7 +32,7 @@ service before it can be called from the Measurement Service.
 
 - InstrumentStudio 2024 Q3 or later
 - NI-DCPower
-- Recommended: TestStand 2021 SP1 or later
+- Recommended: TestStand 2023 Q4 or later
 
 ### Required Hardware
 

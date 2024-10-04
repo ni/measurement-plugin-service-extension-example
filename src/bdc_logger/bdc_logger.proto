@@ -3,12 +3,10 @@ syntax = "proto3";
 package bdc_logger;
 
 service LogMeasurement {
-  rpc LogMeasurement(LogMeasurementRequest) returns (LogMeasurementResponse);
+  rpc Log(LogRequest) returns (LogResponse);
 }
 
-message LogMeasurementResponse{}
-
-message LogMeasurementRequest{
+message LogRequest{
 
   repeated int32 measured_sites = 1;
 
@@ -20,3 +18,5 @@ message LogMeasurementRequest{
 
   repeated bool in_compliance = 5;
 }
+
+message LogResponse{}

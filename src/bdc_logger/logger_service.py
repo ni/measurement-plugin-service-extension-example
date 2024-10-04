@@ -8,8 +8,8 @@ from bdcdatalogger import Fields, MeasurementDetails, TestRun
 from grpc.framework.foundation import logging_pool
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
 from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
-from stubs.log_measurement_pb2 import LogResponse
-from stubs.log_measurement_pb2_grpc import (
+from stubs.bdc_logger_pb2 import LogResponse
+from stubs.bdc_logger_pb2_grpc import (
     LogMeasurementServicer,
     add_LogMeasurementServicer_to_server,
 )

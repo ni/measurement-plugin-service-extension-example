@@ -14,7 +14,7 @@ the custom services in various measurements.
   from the service definition, ensuring that the method implementation is complete.
 - Set up a gRPC server to handle client requests and execute the service's tasks.
 - Register the server location with the discovery service using the discovery client which ensures the
-  custom services available to public.
+  custom services are available public to integrate with other services.
   - Example:
   [Logger service implementation](../src/csv_logger/logger_service.py).
 - Establish the connection to communicate with the service methods.
@@ -45,7 +45,7 @@ the custom services in various measurements.
 
     !["Create_Client"](create_client.png)
 
-  - The client calls the Service APIs by obtaining the request models from the measurement service.
+  - The client then calls the Service APIs by obtaining the request models from the measurement service.
 
 ## Conclusion
 
