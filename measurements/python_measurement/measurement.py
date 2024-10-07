@@ -25,8 +25,8 @@ _NIDCPOWER_TIMEOUT_ERROR_CODES = [
     _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE,
     _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE,
 ]
-GRPC_LOGGER_SERVICE_INTERFACE_NAME = "user.defined.bdclogger.v1.LogService"
-GRPC_LOGGER_SERVICE_CLASS = "user.defined.bdclogger.v1.LogService"
+GRPC_LOGGER_SERVICE_INTERFACE_NAME = "user.defined.csvlogger.v1.LogService"
+GRPC_LOGGER_SERVICE_CLASS = "user.defined.csvlogger.v1.LogService"
 
 script_or_exe = sys.executable if getattr(sys, "frozen", False) else __file__
 service_directory = pathlib.Path(script_or_exe).resolve().parent

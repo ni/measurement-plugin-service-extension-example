@@ -1,10 +1,10 @@
 {
   "services": [
     {
-      "displayName": "LogService",
-      "serviceClass": "user.defined.bdclogger.v1.LogService",
+      "displayName": "CSV Logger Service",
+      "serviceClass": "user.defined.csvlogger.v1.LogService",
       "descriptionUrl": "",
-      "providedInterfaces": [ "user.defined.bdclogger.v1.LogService" ],
+      "providedInterfaces": [ "user.defined.csvlogger.v1.LogService" ],
       "path": "NI.Logger.V1.Service.exe"
     }
   ]

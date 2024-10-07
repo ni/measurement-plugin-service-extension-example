@@ -1,10 +1,10 @@
 {
   "services": [
     {
-      "displayName": "LogService",
-      "serviceClass": "ni.measurementlink.logger.v1.LogService",
+      "displayName": "BDC Logger Service",
+      "serviceClass": "user.defined.bdclogger.v1.LogService",
       "descriptionUrl": "",
-      "providedInterfaces": [ "ni.measurementlink.logger.v1.LogService" ],
+      "providedInterfaces": [ "user.defined.bdclogger.v1.LogService" ],
       "path": "NI.Logger.V1.Service.exe"
     }
   ]

@@ -12,8 +12,8 @@ from stubs.log_measurement_pb2_grpc import (
     add_LogMeasurementServicer_to_server,
 )
 
-GRPC_SERVICE_INTERFACE_NAME = "user.defined.bdclogger.v1.LogService"
-GRPC_SERVICE_CLASS = "user.defined.bdclogger.v1.LogService"
+GRPC_SERVICE_INTERFACE_NAME = "user.defined.csvlogger.v1.LogService"
+GRPC_SERVICE_CLASS = "user.defined.csvlogger.v1.LogService"
 
 class MeasurementService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a CSV file."""

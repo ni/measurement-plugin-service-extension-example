@@ -48,10 +48,10 @@ class MeasurementService(LogMeasurementServicer):
             voltage_measurement = MeasurementDetails(
                 name="Vout",
                 spec_id="VAD",
-                value=request.voltage[pin_index],
+                value=request.voltage_measurements[pin_index],
                 unit="V",
             )
-            data.add_additional_info("Current", str(request.current[pin_index]) + "A")
+            data.add_additional_info("Current", str(request.current_measurements[pin_index]) + "A")
             data.add_additional_info("In-Compliance", str(request.in_compliance[pin_index]))
             data.add_additional_info(
                 "Logged Time", str(datetime.now().strftime("%Y-%m-%d:%H:%M:%S"))

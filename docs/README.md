@@ -59,7 +59,14 @@ the custom services in various measurements.
 
     !["Create_Client"](create_client.png)
 
-  - The client then calls the Service APIs by obtaining the request models from the measurement service.
+  - Use and instantiate the client generated during the stub creation process to call the Service
+    APIs.
+
+  - The client then calls the Service APIs by obtaining the request models from the measurement
+    service.
+    - Example:
+  
+    !["Call_Server_Methods"](call_apis.png)
 
 ## Conclusion
 
