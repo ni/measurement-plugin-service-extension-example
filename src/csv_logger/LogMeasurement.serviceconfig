@@ -4,8 +4,8 @@
       "displayName": "CSV Logger Service",
       "serviceClass": "user.defined.csvlogger.v1.LogService",
       "descriptionUrl": "",
-      "providedInterfaces": [ "user.defined.csvlogger.v1.LogService" ],
-      "path": "NI.Logger.V1.Service.exe"
+      "providedInterfaces": [ "user.defined.logger.v1.LogService" ],
+      "path": "start.bat"
     }
   ]
 } 

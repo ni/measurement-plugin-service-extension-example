@@ -1,7 +1,7 @@
 """A custom service to log measurement data to a CSV file in BDC format."""
 
-import os
 from datetime import datetime
+import pathlib
 
 import grpc
 from bdcdatalogger import Fields, MeasurementDetails, TestRun
@@ -14,8 +14,9 @@ from stubs.bdc_logger_pb2_grpc import (
     add_LogMeasurementServicer_to_server,
 )
 
-GRPC_SERVICE_INTERFACE_NAME = "user.defined.bdclogger.v1.LogService"
+GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.bdclogger.v1.LogService"
+DISPLAY_NAME = "BDC Logger Service"
 
 class MeasurementService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a CSV file in BDC format."""
@@ -37,7 +38,7 @@ class MeasurementService(LogMeasurementServicer):
 
         run = TestRun(
             metadata=METADATA,
-            folder_path=os.path.join(os.getcwd(), "test log"),
+            folder_path= pathlib.Path.cwd() / "test log",
             file_name="test_example",
         )
         data = run.Metadata()
@@ -78,10 +79,10 @@ def serve():
     discovery_client = DiscoveryClient()
     service_location = ServiceLocation("localhost", f"{port}", "")
     service_info = ServiceInfo(
-        GRPC_SERVICE_CLASS,
-        "",
-        [GRPC_SERVICE_INTERFACE_NAME],
-        display_name="BDC Logger Service",
+        service_class=GRPC_SERVICE_CLASS,
+        description_url="",
+        provided_interfaces=[GRPC_SERVICE_INTERFACE_NAME],
+        display_name=DISPLAY_NAME,
     )
     registration_id = discovery_client.register_service(
         service_info=service_info, service_location=service_location

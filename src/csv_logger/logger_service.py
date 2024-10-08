@@ -12,8 +12,9 @@ from stubs.log_measurement_pb2_grpc import (
     add_LogMeasurementServicer_to_server,
 )
 
-GRPC_SERVICE_INTERFACE_NAME = "user.defined.csvlogger.v1.LogService"
+GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.csvlogger.v1.LogService"
+DISPLAY_NAME ="CSV Logger Service"
 
 class MeasurementService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a CSV file."""
@@ -48,10 +49,10 @@ def serve():
     discovery_client = DiscoveryClient()
     service_location = ServiceLocation("localhost", f"{port}", "")
     service_info = ServiceInfo(
-        GRPC_SERVICE_CLASS,
-        "",
-        [GRPC_SERVICE_INTERFACE_NAME],
-        display_name="CSV Logger Service",
+        service_class=GRPC_SERVICE_CLASS,
+        description_url="",
+        provided_interfaces=[GRPC_SERVICE_INTERFACE_NAME],
+        display_name=DISPLAY_NAME,
     )
     registration_id = discovery_client.register_service(
         service_info=service_info, service_location=service_location

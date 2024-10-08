@@ -1,41 +1,32 @@
-# Custom Measurement Plugin Services
+# user-defined Measurement Plugin Services
 
-This README provides a step-by-step guide to integrate custom services into a measurement plug-in.
+This README provides a step-by-step guide to integrate user-defined services into a measurement plug-in.
 The process involves defining a service, generating stubs, establishing a connection, and using
-the custom services in various measurements.
+the user-defined services in various measurements.
 
-## Steps
+## Steps to create a user-defined service
 
-- Define the custom service and rpc methods under the service definition specifying the request and
-  response types. Refer to this
-  [link](https://grpc.io/docs/languages/python/basics/#defining-the-service) for
-  defining a service
-  - Example:
-  [Logger service proto](../src/csv_logger/log_measurement.proto).
-- Generate server interfaces from the service definition. Implement the servicer interface generated
-  from the service definition, ensuring that the method implementation is complete.  Refer to this
-  [link](https://grpc.io/docs/languages/python/basics/#generating-grpc-interfaces-with-custom-package-path)
-  for generating server interfaces and implementing the servicer.
-- Set up a gRPC server to handle client requests and execute the service's tasks.  Refer to this
-  [link](https://grpc.io/docs/languages/python/basics/#starting-the-server) for
-  setting up the gRPC server.
-- Register the server location with the discovery service using the discovery client which ensures the
-  custom services are available public to integrate with other services.
+- Follow the steps outlined in this
+  [site](https://grpc.io/docs/languages/python/basics/#defining-the-service) to define a proto
+  file, to create client and server code and to implement the gRPC server.
+- Using the discovery client, register the service to the discovery service with its location
+  information. This enables the user-defined service to be fetched and used in the measurement
+  plug-ins.
   - Example:
   [Logger service implementation](../src/csv_logger/logger_service.py).
-- Establish the connection to communicate with the service methods.
-  - Create stubs to call the service methods from the service definition.
-  - Instantiate a discovery client to resolve the service location.
-  - Create an insecure gRPC channel to the resolved service location.
-  - Create a stub for the CustomService using the gRPC channel.
-  - Call the service methods through the stubs.
-  - Refer to this
-  [link](https://grpc.io/docs/languages/python/basics/#creating-a-stub) for instructions on creating
-  a channel and stub.
-  - Example:
+
+## Steps to interact with the user-defined service in Python measurements
+
+- Generate the client stubs for the service.
+- Using the discovery client, get the location of the service and create a stub to communicate with
+  the service.
+- Call the service methods using the created stub.
+- Refer the instructions [link](https://grpc.io/docs/languages/python/basics/#creating-a-stub) to
+  create a stub.
+- Example:
   [Establish connection to custom logger service in python](../measurements/python_measurement/measurement.py).
 
-## Integrating the the Custom Service in LabVIEW measurements
+## Steps to interact with the user-defined Service in LabVIEW measurements
 
 - Install gRPC and LabVIEW gRPC Server and Client tool packages.
   - Refer to this
@@ -50,7 +41,7 @@ the custom services in various measurements.
 - Establish the connection to communicate with the service methods.
   - Define Service Interface and Class Names:
     - Provide the gRPC service interface and class names as inputs to the Resolve Service API to
-      retrieve the port where the custom service is running.
+      retrieve the port where the user-defined service is running.
 
     !["Get_Port"](define_service.png)
 
@@ -70,4 +61,5 @@ the custom services in various measurements.
 
 ## Conclusion
 
-This guide covered steps to integrate the custom service in different measurements.
+This guide should have provided you with the steps to implement a user-defined service and how it
+can be used with measurement plug-ins in Python and LabVIEW.
