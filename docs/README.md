@@ -1,4 +1,4 @@
-# user-defined Measurement Plugin Services
+# User-defined Measurement Plugin Services
 
 This README provides a step-by-step guide to integrate user-defined services into a measurement plug-in.
 The process involves defining a service, generating stubs, establishing a connection, and using

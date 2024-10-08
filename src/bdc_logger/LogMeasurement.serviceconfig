@@ -4,7 +4,7 @@
       "displayName": "BDC Logger Service",
       "serviceClass": "user.defined.bdclogger.v1.LogService",
       "descriptionUrl": "",
-      "providedInterfaces": [ "user.defined.logger.v1.LogService" ],
+      "providedInterface": "user.defined.logger.v1.LogService",
       "path": "start.bat"
     }
   ]
