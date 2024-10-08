@@ -25,6 +25,9 @@ indicating that the Logger service was not found.
 
 ### Required Driver Software
 
+- LabVIEW 2023 Q4 or later
+- InstrumentStudio 2024 Q3 or later
+- Recommended: TestStand 2023 Q4 or later
 - NI-DCPower 2023 Q1 or later
 
 ### Required Hardware
