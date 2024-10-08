@@ -13,7 +13,7 @@ the user-defined services in various measurements.
   information. This enables the user-defined service to be fetched and used in the measurement
   plug-ins.
   - Example:
-  [Logger service implementation](../src/csv_logger/logger_service.py).
+  [Logger service implementation](../src/json_logger/logger_service.py).
 
 ## Steps to interact with the user-defined service in Python measurements
 

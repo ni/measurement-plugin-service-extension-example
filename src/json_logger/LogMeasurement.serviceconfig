@@ -1,8 +1,8 @@
 {
   "services": [
     {
-      "displayName": "CSV Logger Service",
-      "serviceClass": "user.defined.csvlogger.v1.LogService",
+      "displayName": "JSON Logger Service",
+      "serviceClass": "user.defined.jsonlogger.v1.LogService",
       "descriptionUrl": "",
       "providedInterface": "user.defined.logger.v1.LogService",
       "path": "start.bat"

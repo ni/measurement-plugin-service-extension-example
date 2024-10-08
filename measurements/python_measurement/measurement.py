@@ -6,14 +6,14 @@ import pathlib
 import sys
 import threading
 import time
-from typing import TYPE_CHECKING, Iterable, List, NamedTuple, Tuple
+from typing import TYPE_CHECKING, Iterable, NamedTuple, Tuple
 
 import click
 import grpc
 import hightime
 import ni_measurement_plugin_sdk_service as nims
 import nidcpower
-import nidcpower.session
+import nidcpower.session as session
 import stubs.log_measurement_pb2_grpc
 from _helpers import configure_logging, verbosity_option
 from ni_measurement_plugin_sdk_service.discovery._client import DiscoveryClient
@@ -26,7 +26,7 @@ _NIDCPOWER_TIMEOUT_ERROR_CODES = [
     _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE,
 ]
 GRPC_LOGGER_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
-GRPC_LOGGER_SERVICE_CLASS = "user.defined.csvlogger.v1.LogService"
+GRPC_LOGGER_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
 
 script_or_exe = sys.executable if getattr(sys, "frozen", False) else __file__
 service_directory = pathlib.Path(script_or_exe).resolve().parent
@@ -52,7 +52,7 @@ logger_service_location = discovery_client.resolve_service(
 logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
 
 # Create a gRPC stub for the Logger service
-logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = logger_service_channel)
+logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel=logger_service_channel)
 
 if TYPE_CHECKING:
     # The nidcpower Measurement named tuple doesn't support type annotations:
@@ -87,7 +87,6 @@ def measure(
     source_delay: float,
 ) -> Tuple[float, float]:
     """Source and measure a DC voltage with an NI SMU."""
-
     cancellation_event = threading.Event()
     measurement_service.context.add_cancel_callback(cancellation_event.set)
 
@@ -112,12 +111,14 @@ def measure(
                     timeout,
                 )
 
-                measured_site = session_info.channel_mappings[0].site
-                measured_pin = session_info.channel_mappings[0].pin_or_relay_name
-                in_compliance = session_info.session.channels[session_info.channel_mappings[0].channel].query_in_compliance()
-                measurement: _Measurement = channels.measure_multiple()[0]            
+                channel_mappings = list(session_info.channel_mappings)
+                measured_site = channel_mappings[0].site
+                measured_pin = channel_mappings[0].pin_or_relay_name
+                in_compliance = session_info.session.channels[
+                    channel_mappings[0].channel
+                ].query_in_compliance()
+                measurement: _Measurement = channels.measure_multiple()[0]
             channels.reset()
-
 
     # Create and send a LogMeasurement request
     logger.Log(
@@ -127,16 +128,17 @@ def measure(
             voltage_measurements=[measurement.voltage],
             current_measurements=[measurement.current],
             in_compliance=[in_compliance],
-
         )
     )
 
     return (
         measurement.voltage,
-        measurement.current,)
+        measurement.current,
+    )
+
 
 def _wait_for_event(
-    channels: nidcpower.session._SessionBase,
+    channels: session._SessionBase,
     cancellation_event: threading.Event,
     event_id: nidcpower.Event,
     timeout: float,

@@ -1,6 +1,6 @@
-"""A custom service for logging measurement data to a CSV file."""
+"""A custom service for logging measurement data to a JSON file."""
 
-import csv
+import json
 
 import grpc
 from grpc.framework.foundation import logging_pool
@@ -13,14 +13,14 @@ from stubs.log_measurement_pb2_grpc import (
 )
 
 GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
-GRPC_SERVICE_CLASS = "user.defined.csvlogger.v1.LogService"
-DISPLAY_NAME ="CSV Logger Service"
+GRPC_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
+DISPLAY_NAME ="JSON Logger Service"
 
 class MeasurementService(LogMeasurementServicer):
-    """A gRPC service that logs measurement data to a CSV file."""
+    """A gRPC service that logs measurement data to a JSON file."""
     
     def Log(self, request, context):
-        """Logs the measurement data received in the request to a CSV file and prints the received
+        """Logs the measurement data received in the request to a JSON file and prints the received
         measurement.
 
         Args:
@@ -30,9 +30,27 @@ class MeasurementService(LogMeasurementServicer):
         Returns:
             The response after logging the measurement.
         """
-        with open("measurements.csv", mode="a", newline="") as file:
-            writer = csv.writer(file)
-            writer.writerow([request])
+        data = {
+            "measured_sites": list(request.measured_sites),
+            "measured_pins": list(request.measured_pins),
+            "current_measurements": list(request.current_measurements),
+            "voltage_measurements": list(request.voltage_measurements),
+            "in_compliance": list(request.in_compliance)
+        }
+        
+        # Read existing data
+        try:
+            with open("measurements.json", mode="r") as file:
+                measurements = json.load(file)
+        except FileNotFoundError:
+            measurements = []
+
+        # Append new data
+        measurements.append(data)
+
+        # Write updated data back to the file
+        with open("measurements.json", mode="w", newline="") as file:
+            json.dump(measurements, file)
 
         print(f"Received measurement: {request}")
         return LogResponse()

@@ -2,7 +2,7 @@
 name = "custom_logger_service"
 version = "1.0.0"
 package-mode = false
-description = "A custom service that logs the measurement data received in the request to a CSV file."
+description = "A custom service that logs the measurement data received in the request to a JSON file."
 authors = ["National Instruments"]
 
 [tool.poetry.dependencies]
