@@ -38,19 +38,12 @@ class MeasurementService(LogMeasurementServicer):
             "in_compliance": list(request.in_compliance)
         }
         
-        # Read existing data
-        try:
-            with open("measurements.json", mode="r") as file:
-                measurements = json.load(file)
-        except FileNotFoundError:
-            measurements = []
+        # Append new data to the JSON file
+        with open("measurements.json", mode="a", newline="") as file:
+            json.dump(data, file)
+            file.write("\n")
 
-        # Append new data
-        measurements.append(data)
-
-        # Write updated data back to the file
-        with open("measurements.json", mode="w", newline="") as file:
-            json.dump(measurements, file)
+        # Note: The JSON formatting is not strictly followed as this is only a sample example.
 
         print(f"Received measurement: {request}")
         return LogResponse()

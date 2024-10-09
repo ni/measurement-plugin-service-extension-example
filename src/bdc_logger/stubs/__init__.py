@@ -1,3 +1,5 @@
+"""Logger Service client stub modules."""
+
 from stubs.bdc_logger_pb2 import LogResponse
 from stubs.bdc_logger_pb2_grpc import (
     LogMeasurementServicer,
