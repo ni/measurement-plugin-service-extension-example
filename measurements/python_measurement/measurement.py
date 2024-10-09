@@ -39,10 +39,7 @@ service_directory = pathlib.Path(script_or_exe).resolve().parent
 measurement_service = nims.MeasurementService(
     service_config_path=service_directory / "NIDCPowerSourceDCVoltage.serviceconfig",
     version="0.1.0.0",
-    ui_file_paths=[
-        service_directory / "NIDCPowerSourceDCVoltage.measui",
-        service_directory / "NIDCPowerSourceDCVoltageUI.vi",
-    ],
+    ui_file_paths=[service_directory / "NIDCPowerSourceDCVoltage.measui",],
 )
 
 # Initialize the discovery client
@@ -57,8 +54,9 @@ logger_service_location = discovery_client.resolve_service(
 # Create a gRPC channel to the resolved service location
 logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
 
+
 # Create a gRPC stub for the Logger service
-logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel=logger_service_channel)
+logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = logger_service_channel)
 
 if TYPE_CHECKING:
     # The nidcpower Measurement named tuple doesn't support type annotations:
@@ -85,7 +83,7 @@ if TYPE_CHECKING:
 @measurement_service.output("voltage_measurement", nims.DataType.Double)
 @measurement_service.output("current_measurement", nims.DataType.Double)
 def measure(
-    pin_name: Iterable[str],
+    pin_name: str,
     voltage_level: float,
     voltage_level_range: float,
     current_limit: float,

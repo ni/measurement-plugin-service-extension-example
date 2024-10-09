@@ -3103,7 +3103,7 @@
 																					<value/>
 																				</MessageType>
 																				<Name classname='Str'>
-																					<value>measurement_pin_name</value>
+																					<value>measurement_pin_names</value>
 																				</Name>
 																				<ArgumentValue classname='ExprValue'>
 																					<value/>

@@ -1,4 +1,4 @@
-"""A custom service for logging measurement data to a JSON file."""
+"A user-defined service to log the measurement data to a JSON file."
 
 import json
 

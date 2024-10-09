@@ -2,7 +2,7 @@
 name = "custom_logger_service"
 version = "1.0.0"
 package-mode = false
-description = "A custom service that logs the measurement data received in the request to a JSON file."
+description = "A user-defined service to log the measurement data to a JSON file."
 authors = ["National Instruments"]
 
 [tool.poetry.dependencies]
@@ -18,11 +18,17 @@ ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
 grpc-stubs = "^1.53"
 
+[tool.black]
+extend_exclude = '\.tox/|_pb2(_grpc)?\.(py|pyi)$'
+line-length = 100
+
+[tool.ni-python-styleguide]
+extend_exclude = '.tox/,*_pb2_grpc.py,*_pb2_grpc.pyi,*_pb2.py,*_pb2.pyi'
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 disallow_untyped_defs = true
-
 ignore_missing_imports = true

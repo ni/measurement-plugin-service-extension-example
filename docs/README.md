@@ -59,7 +59,7 @@ the user-defined services in various measurements.
   
     !["Call_Server_Methods"](call_apis.png)
 
-## NOTE
+## Note
 
 The service classes and provided interfaces should be defined based on the user's preference for
 which user-defined service they wish to interact with in the measurements.

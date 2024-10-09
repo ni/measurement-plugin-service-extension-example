@@ -1,4 +1,4 @@
-"""A custom service to log measurement data to a CSV file in BDC format."""
+"A user-defined service to log the measurement data in BDC format."
 
 from datetime import datetime
 import pathlib
