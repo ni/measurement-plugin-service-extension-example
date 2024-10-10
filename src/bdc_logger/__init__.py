@@ -1,1 +1,0 @@
-"""A user-defined BDC logger."""
