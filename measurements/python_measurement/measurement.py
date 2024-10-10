@@ -6,7 +6,7 @@ import pathlib
 import sys
 import threading
 import time
-from typing import TYPE_CHECKING, Iterable, NamedTuple, Tuple
+from typing import TYPE_CHECKING, NamedTuple, Tuple
 
 import click
 import grpc
@@ -14,10 +14,8 @@ import hightime
 import ni_measurement_plugin_sdk_service as nims
 import nidcpower
 import nidcpower.session as session
-import stubs.log_measurement_pb2_grpc
+from measurements.python_measurement.logger_service_client import LoggerServiceClient
 from _helpers import configure_logging, verbosity_option
-from ni_measurement_plugin_sdk_service.discovery._client import DiscoveryClient
-from stubs.log_measurement_pb2 import LogRequest
 
 _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE = -1074116059
 _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE = -1074097933
@@ -25,14 +23,6 @@ _NIDCPOWER_TIMEOUT_ERROR_CODES = [
     _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE,
     _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE,
 ]
-
-# The service interface constant should be updated if the user intends to use a interface other than
-# the logger service interface.
-GRPC_LOGGER_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
-
-# The service class constant should be updated if the user intends to use a service other than the
-# JSON logger service.
-GRPC_LOGGER_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
 
 script_or_exe = sys.executable if getattr(sys, "frozen", False) else __file__
 service_directory = pathlib.Path(script_or_exe).resolve().parent
@@ -42,21 +32,7 @@ measurement_service = nims.MeasurementService(
     ui_file_paths=[service_directory / "NIDCPowerSourceDCVoltage.measui",],
 )
 
-# Initialize the discovery client
-discovery_client = DiscoveryClient()
-
-# Resolve the service location using the discovery client
-logger_service_location = discovery_client.resolve_service(
-    provided_interface=str(GRPC_LOGGER_SERVICE_INTERFACE_NAME),
-    service_class=str(GRPC_LOGGER_SERVICE_CLASS),
-)
-
-# Create a gRPC channel to the resolved service location
-logger_service_channel = grpc.insecure_channel(logger_service_location.insecure_address)
-
-
-# Create a gRPC stub for the Logger service
-logger = stubs.log_measurement_pb2_grpc.LogMeasurementStub(channel = logger_service_channel)
+logger_service_client = LoggerServiceClient()
 
 if TYPE_CHECKING:
     # The nidcpower Measurement named tuple doesn't support type annotations:
@@ -124,15 +100,12 @@ def measure(
                 measurement: _Measurement = channels.measure_multiple()[0]
             channels.reset()
 
-    # Create and send a LogMeasurement request
-    logger.Log(
-        LogRequest(
-            measured_sites=[measured_site],
-            measured_pins=[measured_pin],
-            voltage_measurements=[measurement.voltage],
-            current_measurements=[measurement.current],
-            in_compliance=[in_compliance],
-        )
+    logger_service_client._log_measurement(
+        measured_sites=[measured_site],
+        measured_pins=[measured_pin],
+        voltage_measurements=[measurement.voltage],
+        current_measurements=[measurement.current],
+        in_compliance=[in_compliance]
     )
 
     return (
