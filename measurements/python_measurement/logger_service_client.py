@@ -16,33 +16,24 @@ class LoggerServiceClient:
     def __init__(
         self,
         *,
-        discovery_client: Optional[DiscoveryClient] = None,
-        grpc_channel: Optional[grpc.Channel] = None,
+        discovery_client: Optional[DiscoveryClient] = DiscoveryClient(),
     ) -> None:
         self.discovery_client = discovery_client
-        self._stub: Optional[LogMeasurementStub] = (
-            None
-        )
-
-        if grpc_channel is not None:
-            self._stub = LogMeasurementStub(
-                grpc_channel
-            )
+        self._stub: Optional[LogMeasurementStub]
 
     def _get_stub(self) -> LogMeasurementStub:
         """Create a gRPC stub for the Logger service."""       
-        if self._stub is None:
-            # Resolve the service location using the discovery client
-            logger_service_location = self.discovery_client.resolve_service(
-                provided_interface=str(GRPC_LOGGER_SERVICE_INTERFACE_NAME),
-                service_class=str(GRPC_LOGGER_SERVICE_CLASS),
-            )
-            
-            #  Create a gRPC channel to the resolved service location
-            channel = grpc.insecure_channel(logger_service_location.insecure_address)
+        # Resolve the service location using the discovery client.
+        logger_service_location = self.discovery_client.resolve_service(
+            provided_interface=str(GRPC_LOGGER_SERVICE_INTERFACE_NAME),
+            service_class=str(GRPC_LOGGER_SERVICE_CLASS),
+        )
+        
+        #  Create a gRPC channel to the resolved service location.
+        channel = grpc.insecure_channel(logger_service_location.insecure_address)
 
-            # Create a gRPC stub for the Logger service
-            self._stub = LogMeasurementStub(channel)
+        # Create a gRPC stub for the Logger service.
+        self._stub = LogMeasurementStub(channel)
         return self._stub
 
     def _log_measurement(self, measured_sites, measured_pins, current_measurements, voltage_measurements, in_compliance):

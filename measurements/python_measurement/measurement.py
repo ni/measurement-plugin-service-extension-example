@@ -14,7 +14,7 @@ import hightime
 import ni_measurement_plugin_sdk_service as nims
 import nidcpower
 import nidcpower.session as session
-from measurements.python_measurement.logger_service_client import LoggerServiceClient
+from logger_service_client import LoggerServiceClient
 from _helpers import configure_logging, verbosity_option
 
 _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE = -1074116059

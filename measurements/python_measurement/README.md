@@ -30,7 +30,7 @@ indicating that the Logger service was not found.
 
 - InstrumentStudio 2024 Q3 or later
 - NI-DCPower
-- Recommended: TestStand 2023 Q4 or later
+- Recommended: TestStand 2021 SP1 or later
 
 ### Required Hardware
 
