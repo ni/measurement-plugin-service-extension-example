@@ -16,7 +16,7 @@ GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
 DISPLAY_NAME ="JSON Logger Service"
 
-class MeasurementService(LogMeasurementServicer):
+class LogService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a JSON file."""
     
     def Log(self, request, context):
@@ -52,7 +52,7 @@ class MeasurementService(LogMeasurementServicer):
 def serve():
     """Starts the gRPC server and registers the service with the service registry."""
     server = grpc.server(logging_pool.pool(max_workers=10))
-    add_LogMeasurementServicer_to_server(MeasurementService(), server)
+    add_LogMeasurementServicer_to_server(LogService(), server)
     host = "[::1]"
     port = str(server.add_insecure_port(f"{host}:0"))
     server.start()

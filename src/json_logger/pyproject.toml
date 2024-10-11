@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "custom_logger_service"
+name = "json_logger_service"
 version = "1.0.0"
 package-mode = false
 description = "A user-defined service to log the measurement data to a JSON file."
