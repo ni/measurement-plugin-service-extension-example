@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package bdc_logger;
+
+service LogMeasurement {
+  rpc Log(LogRequest) returns (LogResponse);
+}
+
+message LogRequest{
+
+  repeated int32 measured_sites = 1;
+
+  repeated string measured_pins = 2;
+
+  repeated float voltage_measurements = 3;
+
+  repeated float current_measurements = 4;
+
+  repeated bool in_compliance = 5;
+}
+
+message LogResponse{}
