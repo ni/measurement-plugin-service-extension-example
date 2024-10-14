@@ -17,7 +17,7 @@
 			<Item Name="log_measurement_client" Type="Folder">
 				<Item Name="log_measurement_client.lvlib" Type="Library" URL="../log_measurement_client/log_measurement_client.lvlib"/>
 			</Item>
-			<Item Name="Json Logger.lvclass" Type="LVClass" URL="../Json Logger/Json Logger.lvclass"/>
+			<Item Name="Json Logger Client.lvclass" Type="LVClass" URL="../Json Logger Client/Json Logger Client.lvclass"/>
 		</Item>
 		<Item Name="NIDCPowerSourceDCVoltage.lvlib" Type="Library" URL="../NI-DCPower Measurement/NIDCPowerSourceDCVoltage.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">

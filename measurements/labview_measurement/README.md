@@ -22,11 +22,15 @@ includes additional functionality to log measurement data using a custom logging
 
 ## Required Software
 
-- LabVIEW 2021 SP1 or later
-- InstrumentStudio 2024 Q3 or later
-- Recommended: TestStand 2021 SP1 or later
-- NI-DCPower 2023 Q1 or later
-- gRPC Server-Client [2] - Code Generator
+- [LabVIEW 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.labview.html#443865)
+  or later
+- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066)
+  or later
+- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
+  or later
+- [NI-DCPower 2023 Q1](https://www.ni.com/en/support/downloads/drivers/download.ni-dcpower.html#477835)
+  or later
+- [gRPC Server-Client [2] - Code Generator](https://github.com/ni/grpc-labview/releases/download/v1.2.6.1/grpc-labview.zip)
 
 ## Required Hardware
 

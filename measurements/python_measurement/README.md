@@ -20,9 +20,11 @@ showcases logging measurement data to a custom logging service.
 
 ## Required Software
 
-- InstrumentStudio 2024 Q3 or later
+- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066)
+  or later
 - NI-DCPower
-- Recommended: TestStand 2021 SP1 or later
+- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
+  or later
 - grpc-stubs==1.53 or later
 - grpcio==1.66 or later
 - grpcio-tools==1.59 or later

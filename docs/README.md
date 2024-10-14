@@ -6,14 +6,16 @@ Discovery Service and using the service in the measurement plug-in.
 
 ## Required Software
 
-- InstrumentStudio 2024 Q3 or later
-- Recommended: TestStand 2021 SP1 or later
+- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066)
+  or later
+- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
+  or later
 
 The software dependencies required for LabVIEW measurements are listed in
-[LabVIEW](../measurements/labview_measurement/README.md)
+[LabVIEW](../measurements/labview_measurement/README.md).
 
 The software dependencies required for LabVIEW measurements are listed in
-[Python Measurement](../measurements/python_measurement/README.md)
+[Python Measurement](../measurements/python_measurement/README.md).
 
 ## User Workflow
 
