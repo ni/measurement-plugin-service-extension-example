@@ -20,12 +20,6 @@ includes additional functionality to log measurement data using a custom logging
 - Uses the NI gRPC Device Server to allow sharing instrument sessions with other
   measurement services when running measurements from TestStand
 
-## Note
-
-This example resolves the Logger service during its startup. Therefore, please ensure that the
-logger service is running before starting the measurement plug-in, else you will get an error
-indicating that the Logger service was not found.
-
 ## Required Software
 
 - LabVIEW 2021 SP1 or later

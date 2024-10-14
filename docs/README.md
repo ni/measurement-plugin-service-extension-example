@@ -54,7 +54,7 @@ registering it with the NI Discovery service .
 - Example:
   [Establish connection to custom logger service in python](../measurements/python_measurement/logger_service_client.py).
 
-## Steps to interact with the user-defined service by creating a client modules in LabVIEW measurements
+## Steps to interact with the user-defined service by creating client modules in LabVIEW measurements
 
 - Install gRPC and LabVIEW gRPC Server and Client tool packages.
   - Refer to this
