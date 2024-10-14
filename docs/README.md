@@ -1,15 +1,26 @@
 # Integrating User-defined Services with Measurement Plug-In
 
-This README provides a step-by-step guide on how to integrate a user-defined service into a
-measurement plug-in. The process involves defining a service, generating stubs, establishing a
-connection to the user-defined service from the measurement services, and using those in
-measurements.
+This README offers a step-by-step guide for integrating a user-defined service into a measurement
+plug-in. The process includes defining the service, generating stubs, registering it with the NI
+Discovery Service and using the service in the measurement plug-in.
+
+## Required Software
+
+- InstrumentStudio 2024 Q3 or later
+- grpc-stubs==1.53 or later
+- grpcio==1.66 or later
+- grpcio-tools==1.59 or later
+- protobuf==4.25.4 or later
+
+The software dependencies required for LabVIEW measurements are listed in
+[LabVIEW](../measurements/labview_measurement/README.md)
+
+The software dependencies required for LabVIEW measurements are listed in
+[Python Measurement](../measurements/python_measurement/README.md)
 
 ## User Workflow
 
-<div style="text-align: center;">
-  <img src="user_workflow.JPG" alt="User Workflow" width="60%">
-</div>
+![User Workflow](user_workflow.png)
 
 ## Steps to create a user-defined service
 
@@ -28,18 +39,25 @@ registering it with the NI Discovery service .
 
 ![Register logger service](register_service_flowchart.JPG)
 
-## Steps to interact with the user-defined service in Python measurements
+## Steps to interact with the user-defined service by creating a client module in Python measurements
 
-- Generate the client stubs for the service.
+- Generate the client stubs for the user-defined service.
 - Using the discovery client, get the location of the service and create a stub to communicate with
   the service.
 - Call the service methods using the created stub.
 - Refer to the [instructions](https://grpc.io/docs/languages/python/basics/#creating-a-stub) to
   create a stub.
+- Create a client module to establish a connection with the user-defined service from the python measurements.
+- Define Service Interface and Service Class Names inside the module.
+- Create a client class that uses the generated client stubs to interact with the service.
+- Use a discovery client to resolve the service location.
+- Establish a gRPC channel to the service and create a stub for making API calls.
+- Define methods in the client class to call the service methods, constructing and sending requests
+  as needed.
 - Example:
-  [Establish connection to custom logger service in python](../measurements/python_measurement/logger_service_helper.py).
+  [Establish connection to custom logger service in python](../measurements/python_measurement/logger_service_client.py).
 
-## Steps to interact with the user-defined Service in LabVIEW measurements
+## Steps to interact with the user-defined service by creating a client modules in LabVIEW measurements
 
 - Install gRPC and LabVIEW gRPC Server and Client tool packages.
   - Refer to this
@@ -54,6 +72,9 @@ registering it with the NI Discovery service .
   </div>
 
 - Establish the connection to communicate with the service methods.
+- Create client VIs under a common class to interact with the user-defined service from LabVIEW
+  measurements.
+- Develop a client VI to initially establish a connection between the service and the measurement.
   - Define Service Interface and Class Names:
     - Provide the gRPC service interface and class names as inputs to the Resolve Service API to
       retrieve the port where the user-defined service is running.
@@ -64,6 +85,8 @@ registering it with the NI Discovery service .
     <img src="establish_connection.png" alt="Establish Connection" width="75%">
   </div>
 
+- In addition to establishing the connection, create a VI to call the service APIs using the gRPC ID
+  obtained from the output of the previous VI.
   - Use the client generated during the stub creation process to call the service APIs.
   - The client then calls the Service APIs by obtaining the request models from the measurement
     service.
@@ -77,11 +100,6 @@ The following **flow chart** details the steps necessary to integrate a user-def
 measurement service.
 
 ![Resolve logger service](resolve_service_flowchart.JPG)
-
-## Note
-
-The service classes and interfaces should be defined according to the user's preference for the
-specific custom-defined service they want to interact with in the measurements.
 
 ## Conclusion
 

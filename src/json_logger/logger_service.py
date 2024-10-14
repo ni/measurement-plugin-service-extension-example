@@ -44,8 +44,6 @@ class LoggerService(LogMeasurementServicer):
             file.write("\n")
 
         # Note: The JSON formatting is not strictly followed as this is only a sample example.
-
-        print(f"Received measurement: {request}")
         return LogResponse()
 
 

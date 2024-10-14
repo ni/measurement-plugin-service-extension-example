@@ -29,7 +29,7 @@ service_directory = pathlib.Path(script_or_exe).resolve().parent
 measurement_service = nims.MeasurementService(
     service_config_path=service_directory / "NIDCPowerSourceDCVoltage.serviceconfig",
     version="0.1.0.0",
-    ui_file_paths=[service_directory / "NIDCPowerSourceDCVoltage.measui",],
+    ui_file_paths=[service_directory / "NIDCPowerSourceDCVoltage.measui"],
 )
 
 logger_service_client = LoggerServiceClient()
@@ -100,7 +100,7 @@ def measure(
                 measurement: _Measurement = channels.measure_multiple()[0]
             channels.reset()
 
-    logger_service_client._log_measurement(
+    logger_service_client.log_measurement(
         measured_sites=[measured_site],
         measured_pins=[measured_pin],
         voltage_measurements=[measurement.voltage],
@@ -108,10 +108,7 @@ def measure(
         in_compliance=[in_compliance]
     )
 
-    return (
-        measurement.voltage,
-        measurement.current,
-    )
+    return (measurement.voltage, measurement.current)
 
 
 def _wait_for_event(

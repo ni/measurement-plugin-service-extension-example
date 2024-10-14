@@ -1,7 +1,7 @@
 # NI-DCPower Source DC Voltage
 
-This is a measurement plug-in example that sources and measures a DC voltage with an
-NI SMU and includes additional functionality to log measurement data using a custom logging service.
+This is a measurement plug-in example that sources and measures a DC voltage with an NI SMU and
+showcases logging measurement data to a custom logging service.
 
 ## Features
 
@@ -17,12 +17,6 @@ NI SMU and includes additional functionality to log measurement data using a cus
     use cases, these steps should be moved to the `ProcessSetup` and `ProcessCleanup` callbacks.
 - Uses the NI gRPC Device Server to allow sharing instrument sessions with other
   measurement services when running measurements from TestStand.
-
-### NOTE
-
-This example resolves the Logger service during the measurement service startup. Therefore, please
-ensure that the logger service is running before starting the measurement plug-in, else you will get
-an error indicating that the Logger service was not found.
 
 ## Required Software
 
