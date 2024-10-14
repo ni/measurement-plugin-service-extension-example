@@ -7,10 +7,7 @@ Discovery Service and using the service in the measurement plug-in.
 ## Required Software
 
 - InstrumentStudio 2024 Q3 or later
-- grpc-stubs==1.53 or later
-- grpcio==1.66 or later
-- grpcio-tools==1.59 or later
-- protobuf==4.25.4 or later
+- Recommended: TestStand 2021 SP1 or later
 
 The software dependencies required for LabVIEW measurements are listed in
 [LabVIEW](../measurements/labview_measurement/README.md)

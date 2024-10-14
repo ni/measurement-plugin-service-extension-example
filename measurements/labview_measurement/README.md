@@ -26,12 +26,13 @@ This example resolves the Logger service during its startup. Therefore, please e
 logger service is running before starting the measurement plug-in, else you will get an error
 indicating that the Logger service was not found.
 
-## Required Driver Software
+## Required Software
 
 - LabVIEW 2021 SP1 or later
 - InstrumentStudio 2024 Q3 or later
 - Recommended: TestStand 2021 SP1 or later
 - NI-DCPower 2023 Q1 or later
+- gRPC Server-Client [2] - Code Generator
 
 ## Required Hardware
 
