@@ -41,9 +41,6 @@ registering it with the NI Discovery service .
 ## Steps to interact with the user-defined service by creating a client module in Python measurements
 
 - Generate the client stubs for the user-defined service.
-- Using the discovery client, get the location of the service and create a stub to communicate with
-  the service.
-- Call the service methods using the created stub.
 - Refer to the [instructions](https://grpc.io/docs/languages/python/basics/#creating-a-stub) to
   create a stub.
 - Create a client module to establish a connection with the user-defined service from the python measurements.
