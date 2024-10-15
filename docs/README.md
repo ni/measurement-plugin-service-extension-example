@@ -108,8 +108,3 @@ The following **flow chart** details the steps necessary to integrate a user-def
 measurement service.
 
 ![Resolve logger service](resolve_service_flowchart.JPG)
-
-## Conclusion
-
-This guide should have provided you with the steps to implement a user-defined service and how it
-can be used with measurement plug-ins in Python and LabVIEW.
