@@ -77,6 +77,8 @@ registering it with the NI Discovery service .
   - Create a Discovery Client:
     - Instantiate a DiscoveryClient to resolve the service location.
 
+  Example:
+
   <div style="text-align: center;">
     <img src="establish_connection.png" alt="Establish Connection" width="75%">
   </div>
@@ -86,10 +88,20 @@ registering it with the NI Discovery service .
   - Use the client generated during the stub creation process to call the service APIs.
   - The client then calls the Service APIs by obtaining the request models from the measurement
     service.
-    - Example:
+
+  Example:
   
   <div style="text-align: center;">
     <img src="call_apis.png" alt="Call Service Methods" width="75%">
+  </div>
+
+- Finally, Create a VI to ensure that the client is properly closed without any open connections and
+  all associated resources are released for the client.
+
+  Example:
+
+  <div style="text-align: center;">
+    <img src="destroy_client.png" alt="Call Service Methods" width="75%">
   </div>
 
 The following **flow chart** details the steps necessary to integrate a user-defined service into the
