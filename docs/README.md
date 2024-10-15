@@ -1,8 +1,8 @@
-# Integrating User-defined Services with Measurement Plug-In
+# Integrating Python User-defined Services with Measurement Plug-In
 
-This README offers a step-by-step guide for integrating a user-defined service into a measurement
-plug-in. The process includes defining the service, generating stubs, registering it with the NI
-Discovery Service and using the service in the measurement plug-in.
+This README provides a step-by-step guide for creating a python user-defined gRPC service and integrating
+it with measurement services. The process includes defining the service, generating stubs,
+registering it with the NI Discovery Service, and using the service in the measurement plug-in.
 
 ## Required Software
 
@@ -14,7 +14,7 @@ Discovery Service and using the service in the measurement plug-in.
 The software dependencies required for LabVIEW measurements are listed in
 [LabVIEW](../measurements/labview_measurement/README.md).
 
-The software dependencies required for LabVIEW measurements are listed in
+The software dependencies required for Python measurements are listed in
 [Python Measurement](../measurements/python_measurement/README.md).
 
 ## User Workflow
