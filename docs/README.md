@@ -35,8 +35,8 @@ Software dependencies,
 ### Note
 
 - Using a discovery service to dynamically resolve the service location is advantageous over using a
-  fixed port number because it enhances flexibility and scalability.
-- Fixed port numbers can lead to conflicts and are less adaptable to changes in the network environment.
+  fixed port number because fixed port numbers can lead to conflicts and are less adaptable to
+  changes in the network environment.
 - Dynamic resolution allows services to be relocated or scaled across different machines without
   requiring changes to the client configuration, ensuring more robust and maintainable deployments.
 
