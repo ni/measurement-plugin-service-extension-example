@@ -11,11 +11,10 @@ registering it with the NI Discovery Service, and using the service in the measu
 - Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
   or later
 
-The software dependencies required for LabVIEW measurements are listed in
-[LabVIEW](../measurements/labview_measurement/README.md).
+Software dependencies,
 
-The software dependencies required for Python measurements are listed in
-[Python Measurement](../measurements/python_measurement/README.md).
+- [LabVIEW Measurement Plug-ins](../measurements/labview_measurement/README.md)
+- [Python Measurement Plug-ins](../measurements/python_measurement/README.md).
 
 ## User Workflow
 
@@ -32,6 +31,14 @@ The software dependencies required for Python measurements are listed in
   plug-ins.
   - Example:
   [Logger service implementation](../src/json_logger/logger_service.py).
+
+### Note
+
+- Using a discovery service to dynamically resolve the service location is advantageous over using a
+  fixed port number because it enhances flexibility and scalability.
+- Fixed port numbers can lead to conflicts and are less adaptable to changes in the network environment.
+- Dynamic resolution allows services to be relocated or scaled across different machines without
+  requiring changes to the client configuration, ensuring more robust and maintainable deployments.
 
 The following **flow chart** outlines the steps required to create a user-defined service and
 registering it with the NI Discovery service .
