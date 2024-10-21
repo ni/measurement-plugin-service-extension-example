@@ -1,23 +1,23 @@
 # Extend Measurement Plug-In framework with custom features in Python
 
-Measurement Plug-In architecture is Microservices based where the components are gRPC services. gRPC
-services being network based,  allows the components to work across languages. To retain the
-language-agnostic nature, any feature extension or customization must follow the gRPC framework and
-hence be gRPC service.
+The Measurement Plug-In architecture is microservices-based, with components that are gRPC services.
+Since gRPC services are network-based, they allow components to work across different languages. To
+retain this language-agnostic nature, any feature extension or customization must follow the gRPC
+framework and, therefore, be implemented as a gRPC service.
 
 A user-defined gRPC service is a custom service created by a developer using the gRPC framework. It
 involves defining service methods and message types in a `.proto` file, generating client and server
-code from this definition, and implementing the server logic. This service can then be registered
+code from this definition, and implementing the server logic. The service can then be registered
 with a discovery service to allow various clients to communicate with it over the gRPC protocol,
 enabling integration across different technology stacks.
 
-Data Loggers are commonly used to log measurement and debug data during Measurements execution.
-Let us consider a scenario where, a logger implementation is available in Python which can only be
-integrated into Python measurement systems. However, there are other measurements written in
-different technology stacks (say, LabVIEW and C#). As a result, the logger implementation in Python
-cannot be directly reused across all other tech stacks and platforms. To address this issue,
-implement/port the logger into a gRPC service and register with the discovery service. Now, these
-gRPC services are available for use from the measurement plug-ins.
+Data loggers are commonly used to record measurements and debug data during measurement execution.
+Let us consider a scenario where a logger implementation is available in Python, but it can only be
+integrated into Python-based measurement systems. However, other measurements are written in
+different technology stacks, such as LabVIEW and C#. As a result, the Python logger implementation
+cannot be directly reused across all other tech stacks and platforms. To address this issue, the
+logger can be implemented or ported as a gRPC service and registered with the discovery service.
+Once registered, these gRPC services become available for use by the measurement plug-ins.
 
 ## User Workflow
 
