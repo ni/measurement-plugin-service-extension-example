@@ -15,7 +15,7 @@
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Json Logger" Type="Folder">
 			<Item Name="log_measurement_client" Type="Folder">
-				<Item Name="log_measurement_client.lvlib" Type="Library" URL="../log_measurement_client/log_measurement_client.lvlib"/>
+				<Item Name="log_measurement_client.lvlib" Type="Library" URL="../Json Logger Client/log_measurement_client.lvlib"/>
 			</Item>
 			<Item Name="Json Logger Client.lvclass" Type="LVClass" URL="../Json Logger Client/Json Logger Client.lvclass"/>
 		</Item>
