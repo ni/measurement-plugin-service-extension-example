@@ -1,24 +1,23 @@
-# Integrating Python User-defined Services with Measurement Plug-In
+# Extend Measurement Plug-In framework with custom features in Python
+
+Measurement Plug-In architecture is Microservices based where the components are gRPC services. gRPC
+services being network based,  allows the components to work across languages. To retain the
+language-agnostic nature, any feature extension or customization must follow the gRPC framework and
+hence be gRPC service.
 
 A user-defined gRPC service is a custom service created by a developer using the gRPC framework. It
-involves defining service methods and message types in a .proto file, generating client and server
+involves defining service methods and message types in a `.proto` file, generating client and server
 code from this definition, and implementing the server logic. This service can then be registered
 with a discovery service to allow various clients to communicate with it over the gRPC protocol,
 enabling integration across different technology stacks.
 
-## Why User-Defined gRPC Service?
-
-- In a manufacturing plant, various sensors and instruments are used to monitor and control the
-production process. These sensors generate a large amount of measurement data that needs to be
-logged. Currently, there is a logger implementation available in Python that can only be integrated
-into Python measurement systems. However, the measurements are written in different technology
-stacks, including LabVIEW and C#. As a result, the logger implementation written in one language
-cannot be directly reused across all these different platforms.
-
-- To address this issue, user-defined gRPC services can be registered with the discovery service. Once
-registered, these services become available for various measurements to communicate through gRPC.
-This approach allows for integration and implementation across different measurement systems without
-the need to repeat the process for each technology stack.
+Data Loggers are commonly used to log measurement and debug data during Measurements execution.
+Let us consider a scenario where, a logger implementation is available in Python which can only be
+integrated into Python measurement systems. However, there are other measurements written in
+different technology stacks (say, LabVIEW and C#). As a result, the logger implementation in Python
+cannot be directly reused across all other tech stacks and platforms. To address this issue,
+implement/port the logger into a gRPC service and register with the discovery service. Now, these
+gRPC services are available for use from the measurement plug-ins.
 
 ## User Workflow
 
@@ -52,11 +51,12 @@ Now, let's go through a step-by-step guide for creating a user-defined gRPC serv
 
 ### Note
 
-- Using a discovery service to dynamically resolve the service location is advantageous over using a
-  fixed port number because fixed port numbers can lead to conflicts and are less adaptable to
+- Using the discovery service to dynamically resolve the service location is preferred over a
+  static port number as the port number may result in a conflict and are less adaptable to
   changes in the network environment.
-- Dynamic resolution allows services to be relocated or scaled across different machines without
-  requiring changes to the client configuration, ensuring more robust and maintainable deployments.
+- Dynamic resolution of the services' port number allows services to be relocated or scaled across
+  different machines without requiring changes to the client configuration, ensuring more robust and
+  maintainable deployments.
 
 The following **flow chart** outlines the steps required to create a user-defined service and
 registering it with the NI Discovery service .
