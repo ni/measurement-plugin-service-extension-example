@@ -1,0 +1,11 @@
+{
+  "services": [
+    {
+      "displayName": "JSON Logger Service",
+      "serviceClass": "user.defined.jsonlogger.v1.LogService",
+      "descriptionUrl": "",
+      "providedInterface": "user.defined.logger.v1.LogService",
+      "path": "start.bat"
+    }
+  ]
+} 
