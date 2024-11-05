@@ -45,5 +45,5 @@ Search open/closed issues before submitting. Someone may have reported the same 
 
 * OS & Device: [e.g. macOS, Windows, Linux] on [Mac, PC]
 * `ni-measurement-plugin-sdk-service` version [e.g. 2.1.0]
-* InstrumentStudio Pro version [e.g. 24Q4]
+* InstrumentStudio version [e.g. 24Q4]
 * Python version [e.g. 3.9]
