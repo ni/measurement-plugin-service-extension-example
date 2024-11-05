@@ -7,7 +7,7 @@ import abc
 import collections.abc
 import grpc
 import grpc.aio
-import stubs.log_measurement_pb2 as log_measurement_pb2
+import log_measurement_pb2
 import typing
 
 _T = typing.TypeVar("_T")
