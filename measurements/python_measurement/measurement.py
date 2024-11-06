@@ -14,8 +14,8 @@ import hightime
 import ni_measurement_plugin_sdk_service as nims
 import nidcpower
 import nidcpower.session as session
-from logger_service_client import LoggerServiceClient
 from _helpers import configure_logging, verbosity_option
+from logger_service_client import LoggerServiceClient
 
 _NIDCPOWER_WAIT_FOR_EVENT_TIMEOUT_ERROR_CODE = -1074116059
 _NIDCPOWER_TIMEOUT_EXCEEDED_ERROR_CODE = -1074097933
@@ -105,7 +105,7 @@ def measure(
         measured_pins=[measured_pin],
         voltage_measurements=[measurement.voltage],
         current_measurements=[measurement.current],
-        in_compliance=[in_compliance]
+        in_compliance=[in_compliance],
     )
 
     return (measurement.voltage, measurement.current)

@@ -6,7 +6,7 @@ import grpc
 from grpc.framework.foundation import logging_pool
 from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
 from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
-from stubs.log_measurement_pb2 import LogResponse
+from stubs.log_measurement_pb2 import LogResponse, LogRequest
 from stubs.log_measurement_pb2_grpc import (
     LogMeasurementServicer,
     add_LogMeasurementServicer_to_server,
@@ -14,14 +14,16 @@ from stubs.log_measurement_pb2_grpc import (
 
 GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
-DISPLAY_NAME ="JSON Logger Service"
+DISPLAY_NAME = "JSON Logger Service"
+
 
 class LoggerService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a JSON file."""
-    
-    def Log(self, request, context):
-        """Logs the measurement data received in the request to a JSON file and prints the received
-        measurement.
+
+    def Log(  # noqa: N802 - as gRPC is a language agnostic, function name need not be in smaller case.
+        self, request: LogRequest, context: grpc.ServicerContext
+    ) -> LogResponse:
+        """Logs received measurement data to a JSON file and prints the measurement.
 
         Args:
             request: The measurement data to be logged.
@@ -35,9 +37,9 @@ class LoggerService(LogMeasurementServicer):
             "measured_pins": list(request.measured_pins),
             "current_measurements": list(request.current_measurements),
             "voltage_measurements": list(request.voltage_measurements),
-            "in_compliance": list(request.in_compliance)
+            "in_compliance": list(request.in_compliance),
         }
-        
+
         # Append new data to the JSON file
         with open("measurements.json", mode="a", newline="") as file:
             json.dump(data, file)
@@ -47,7 +49,7 @@ class LoggerService(LogMeasurementServicer):
         return LogResponse()
 
 
-def serve():
+def serve() -> None:
     """Starts the gRPC server and registers the service with the service registry."""
     server = grpc.server(logging_pool.pool(max_workers=10))
     add_LogMeasurementServicer_to_server(LoggerService(), server)

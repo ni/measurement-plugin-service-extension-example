@@ -30,6 +30,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 disallow_untyped_defs = true
+exclude = ["^stubs/.*"]
 
 [[tool.mypy.overrides]]
 module = [
@@ -37,3 +38,7 @@ module = [
     "nidcpower.*",
 ]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["stubs.*"]
+ignore_errors = true
