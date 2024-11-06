@@ -17,6 +17,8 @@ ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
 grpc-stubs = "^1.53"
 grpcio-tools = "1.59.0"
+mypy-protobuf = "^3.6.0"
+types-protobuf = "^5.28.3.20241030"
 
 [tool.black]
 extend_exclude = '\.tox/|_pb2(_grpc)?\.(py|pyi)$'
