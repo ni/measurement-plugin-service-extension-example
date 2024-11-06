@@ -4,13 +4,14 @@ import json
 
 import grpc
 from grpc.framework.foundation import logging_pool
+from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
+from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
+
 from json_logger.stubs.log_measurement_pb2 import LogRequest, LogResponse
 from json_logger.stubs.log_measurement_pb2_grpc import (
     LogMeasurementServicer,
     add_LogMeasurementServicer_to_server,
 )
-from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
-from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
 
 GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
