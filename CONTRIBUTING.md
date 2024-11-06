@@ -1,11 +1,11 @@
-# Contributing to \<reponame\> 
+# Contributing to Measurement Plug-In Service Extension Example
 
-Contributions to \<reponame\> are welcome from all!
+Contributions to Measurement Plug-In Service Extension Example are welcome from all!
 
-\<reponame\> is managed via [git](https://git-scm.com), with the canonical upstream
+Measurement Plug-In Service Extension Example is managed via [git](https://git-scm.com), with the canonical upstream
 repository hosted on [GitHub](https://github.com/ni/<reponame>/).
 
-\<reponame\> follows a pull-request model for development.  If you wish to
+Measurement Plug-In Service Extension Example follows a pull-request model for development.  If you wish to
 contribute, you will need to create a GitHub account, fork this project, push a
 branch with your changes to your project, and then submit a pull request.
 
@@ -21,11 +21,97 @@ See [GitHub's official documentation](https://help.github.com/articles/using-pul
 
 # Getting Started
 
-- TODO: include build steps here.
+## Prerequisites
 
-# Testing
+- (Optional) Install [Visual Studio Code](https://code.visualstudio.com/download).
+- Install Git.
+- Install Python and add it to the `PATH`.
+- Install [Poetry](https://python-poetry.org/docs/#installation). Version >= 1.8.2
 
-- TODO: include testing steps here.
+## Clone or Update the Git Repository
+
+To download the Measurement Plug-In Integration Example for Python source, clone its Git
+repository to your local PC.
+
+```cmd
+git clone https://github.com/ni/measurement-plugin-service-extension-example.git
+```
+
+If you already have the Git repository on your local PC, you can update it
+
+```cmd
+git checkout main
+
+git pull
+```
+
+## Install the Dependencies
+
+From the package's subdirectory, run the [`poetry install`](https://python-poetry.org/docs/cli/#install)
+command. This creates an in-project virtual environment (`.venv`) and installs
+the package's dependencies and dev-dependencies, as specified in its
+`pyproject.toml` and `poetry.lock` files.
+
+```cmd
+poetry install
+```
+
+## Activate the Virtual Environment (If Needed)
+
+- In the command prompt: `poetry shell`
+- In VS Code ([link](https://code.visualstudio.com/docs/python/environments#_select-and-activate-an-environment))
+
+## Steps to Contribute
+
+To contribute to this project, it is recommended that you follow these steps:
+
+1. Make your change.
+2. Send a GitHub Pull Request to the main repository's master branch. GitHub
+   Pull Requests are the expected method of code collaboration on this project.
+
+# Lint and Build Code
+
+## Lint Code for Style and Formatting
+
+Use [ni-python-styleguide](https://github.com/ni/python-styleguide) to lint the
+code for style and formatting. This runs other tools such as `flake8`,
+`pycodestyle`, and `black`.
+
+```cmd
+poetry run ni-python-styleguide lint
+```
+
+If there are any failures, try using `ni-python-styleguide` to fix them, then
+lint the code again. If `ni-python-styleguide` doesn't fix the failures, you
+will have to manually fix them.
+
+```cmd
+poetry run ni-python-styleguide fix
+poetry run ni-python-styleguide lint
+```
+
+## Mypy Type Checking
+
+Use [Mypy](https://pypi.org/project/mypy/) to type check the code.
+
+```cmd
+poetry run mypy src
+```
+
+## Bandit Security Checks
+
+Use [Bandit](https://pypi.org/project/bandit/) to check for common security issues.
+
+```cmd
+poetry run bandit -c pyproject.toml -r src
+```
+
+# Adding Dependencies
+
+You can add new dependencies using `poetry add` or by editing the `pyproject.toml` file.
+
+When adding new dependencies, use a `>=` version constraint (instead of `^`)
+unless the dependency uses semantic versioning.
 
 # Developer Certificate of Origin (DCO)
 
@@ -57,5 +143,5 @@ See [GitHub's official documentation](https://help.github.com/articles/using-pul
 
 (taken from [developercertificate.org](https://developercertificate.org/))
 
-See [LICENSE](https://github.com/ni/<reponame>/blob/main/LICENSE)
-for details about how \<reponame\> is licensed.
+See [LICENSE](https://github.com/ni/measurement-plugin-service-extension-example/blob/main/LICENSE)
+for details about how Measurement Plug-In Service Extension Example is licensed.
