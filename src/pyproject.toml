@@ -1,7 +1,6 @@
 [tool.poetry]
-name = "json_logger_service"
+name = "json_logger"
 version = "1.0.0"
-package-mode = false
 description = "A user-defined service to log the measurement data to a JSON file."
 authors = ["NI <opensource@ni.com>"]
 

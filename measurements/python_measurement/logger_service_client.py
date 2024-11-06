@@ -20,7 +20,7 @@ class LoggerServiceClient:
         *,
         discovery_client: DiscoveryClient = DiscoveryClient(),
     ) -> None:
-        """Initialize the LoggerServiceClient with a DiscoveryClient."""
+        """Initialize the Logger Service client."""
         self._discovery_client = discovery_client
         self._stub: Optional[LogMeasurementStub] = None
 

@@ -4,13 +4,13 @@ import json
 
 import grpc
 from grpc.framework.foundation import logging_pool
-from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
-from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
-from stubs.log_measurement_pb2 import LogResponse, LogRequest
-from stubs.log_measurement_pb2_grpc import (
+from json_logger.stubs.log_measurement_pb2 import LogRequest, LogResponse
+from json_logger.stubs.log_measurement_pb2_grpc import (
     LogMeasurementServicer,
     add_LogMeasurementServicer_to_server,
 )
+from ni_measurement_plugin_sdk_service.discovery import DiscoveryClient, ServiceLocation
+from ni_measurement_plugin_sdk_service.measurement.info import ServiceInfo
 
 GRPC_SERVICE_INTERFACE_NAME = "user.defined.logger.v1.LogService"
 GRPC_SERVICE_CLASS = "user.defined.jsonlogger.v1.LogService"
@@ -20,10 +20,10 @@ DISPLAY_NAME = "JSON Logger Service"
 class LoggerService(LogMeasurementServicer):
     """A gRPC service that logs measurement data to a JSON file."""
 
-    def Log(  # noqa: N802 - as gRPC is a language agnostic, function name need not be in smaller case.
+    def Log(  # noqa: N802 - function name should be lowercase
         self, request: LogRequest, context: grpc.ServicerContext
     ) -> LogResponse:
-        """Logs received measurement data to a JSON file and prints the measurement.
+        """Logs the received measurement data to a JSON file and prints the measurement.
 
         Args:
             request: The measurement data to be logged.
@@ -49,7 +49,7 @@ class LoggerService(LogMeasurementServicer):
         return LogResponse()
 
 
-def serve() -> None:
+def start_server() -> None:
     """Starts the gRPC server and registers the service with the service registry."""
     server = grpc.server(logging_pool.pool(max_workers=10))
     add_LogMeasurementServicer_to_server(LoggerService(), server)
@@ -75,4 +75,4 @@ def serve() -> None:
 
 
 if __name__ == "__main__":
-    serve()
+    start_server()

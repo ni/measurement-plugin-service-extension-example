@@ -38,7 +38,3 @@ module = [
     "nidcpower.*",
 ]
 ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["stubs.*"]
-ignore_errors = true
