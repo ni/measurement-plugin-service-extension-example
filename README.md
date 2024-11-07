@@ -1,23 +1,21 @@
-# Extend Measurement Plug-In framework with custom features in Python
+# Measurement Plug-In Service Extension Example
 
-The Measurement Plug-In architecture is microservices-based, with components that are gRPC services.
-Since gRPC services are network-based, they allow components to work across different languages. To
-retain this language-agnostic nature, any feature extension or customization must follow the gRPC
-framework and, therefore, be implemented as a gRPC service.
+- [Measurement Plug-In Service Extension Example](#measurement-plug-in-service-extension-example)
+  - [Extend Measurement Plug-In framework with custom features in Python](#extend-measurement-plug-in-framework-with-custom-features-in-python)
+  - [User Workflow](#user-workflow)
+  - [Required Software](#required-software)
+  - [Steps to create a user-defined service](#steps-to-create-a-user-defined-service)
+    - [Note](#note)
+  - [Steps to interact with the user-defined service by creating a client module in Python measurements](#steps-to-interact-with-the-user-defined-service-by-creating-a-client-module-in-python-measurements)
+  - [Steps to interact with the user-defined service by creating client modules in LabVIEW measurements](#steps-to-interact-with-the-user-defined-service-by-creating-client-modules-in-labview-measurements)
 
-A user-defined gRPC service is a custom service created by a developer using the gRPC framework. It
-involves defining service methods and message types in a `.proto` file, generating client and server
-code from this definition, and implementing the server logic. The service can then be registered
-with a discovery service to allow various clients to communicate with it over the gRPC protocol,
-enabling integration across different technology stacks.
+## Extend Measurement Plug-In framework with custom features in Python
 
-Data loggers are commonly used to record measurements and debug data during measurement execution.
-Let us consider a scenario where a logger implementation is available in Python, but it can only be
-integrated into Python-based measurement systems. However, other measurements are written in
-different technology stacks, such as LabVIEW and C#. As a result, the Python logger implementation
-cannot be directly reused across all other tech stacks and platforms. To address this issue, the
-logger can be implemented or ported as a gRPC service and registered with the discovery service.
-Once registered, these gRPC services become available for use by the measurement plug-ins.
+The Measurement Plug-In architecture is based on microservices, with components functioning as gRPC services. Since gRPC is network-based, it allows these components to be language-agnostic and work seamlessly across different programming environments. Any feature extensions or customizations, therefore, should also be implemented as gRPC services.
+
+A user-defined gRPC service is a custom-built service where you define the service methods and message types in a `.proto` file, generate client and server code, and implement the server logic. Registering this service with a discovery tool allows various clients to access and communicate with it over gRPC, making it easy to integrate across technology stacks.
+
+Data loggers are often used to record measurements and debug data during execution. For example, a logger implemented in Python might only be compatible with Python-based systems. However, if other measurement systems are written in languages like LabVIEW or C#, direct integration may not be possible. By converting the logger into a gRPC service and registering it with the discovery service, it becomes accessible to all measurement plug-ins, regardless of language.
 
 ## User Workflow
 
@@ -59,7 +57,7 @@ Now, let's go through a step-by-step guide for creating a user-defined gRPC serv
   maintainable deployments.
 
 The following **flow chart** outlines the steps required to create a user-defined service and
-registering it with the NI Discovery service .
+registering it with the NI Discovery service.
 
 ![Register logger service](./docs/images/register_service_flowchart.JPG)
 
@@ -87,10 +85,8 @@ registering it with the NI Discovery service .
 
 - Generate client interfaces from the the .proto file to communicate with the service methods using
   the `gRPC Server-Client [2] - Code Generator`.
-
-  <div style="text-align: center;">
-    <img src="./docs/images/gRPC_Server_Client_Generator.png" alt="gRPC Server Client Generator" width="50%">
-  </div>
+  
+  ![gRPC Server Client Generator](./docs/images/gRPC_Server_Client_Generator.png)
 
 - Establish the connection to communicate with the service methods.
 - Create client VIs under a common class to interact with the user-defined service from LabVIEW
@@ -103,10 +99,8 @@ registering it with the NI Discovery service .
     - Instantiate a DiscoveryClient to resolve the service location.
 
   Example:
-
-  <div style="text-align: center;">
-    <img src="./docs/images/establish_connection.png" alt="Establish Connection" width="75%">
-  </div>
+  
+  ![Establish Connection](./docs/images/establish_connection.png)
 
 - In addition to establishing the connection, create a VI to call the service APIs using the gRPC ID
   obtained from the output of the previous VI.
@@ -116,18 +110,14 @@ registering it with the NI Discovery service .
 
   Example:
   
-  <div style="text-align: center;">
-    <img src="./docs/images/call_apis.png" alt="Call Service Methods" width="75%">
-  </div>
+  ![Call Service Methods](./docs/images/call_apis.png)
 
 - Finally, Create a VI to ensure that the client is properly closed without any open connections and
   all associated resources are released for the client.
 
   Example:
-
-  <div style="text-align: center;">
-    <img src="./docs/images/destroy_client.png" alt="Call Service Methods" width="75%">
-  </div>
+  
+  ![Call Service Method](./docs/images/destroy_client.png)
 
 The following **flow chart** details the steps necessary to integrate a user-defined service into the
 measurement service.
