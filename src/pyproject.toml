@@ -1,9 +1,8 @@
 [tool.poetry]
-name = "json_logger_service"
+name = "json_logger"
 version = "1.0.0"
-package-mode = false
 description = "A user-defined service to log the measurement data to a JSON file."
-authors = ["National Instruments"]
+authors = ["NI <opensource@ni.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -14,11 +13,12 @@ protobuf = "4.25.4"
 
 [tool.poetry.group.dev.dependencies]
 ni-python-styleguide = ">=0.4.1"
-mypy = ">=1.0"
+mypy = "^1.13.0"
 grpc-stubs = "^1.53"
 grpcio-tools = "1.59.0"
 mypy-protobuf = "^3.6.0"
 types-protobuf = "^5.28.3.20241030"
+bandit = { version = "^1.7", extras = ["toml"] }
 
 [tool.black]
 extend_exclude = '\.tox/|_pb2(_grpc)?\.(py|pyi)$'
@@ -34,3 +34,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.mypy]
 disallow_untyped_defs = true
 ignore_missing_imports = true
+exclude = ["^stubs/.*"]
+
+[tool.bandit]
+exclude_dirs = [".venv"]
