@@ -1,6 +1,6 @@
 # Contributing to Measurement Plug-In Service Extension Example
 
-Contributions to Measurement Plug-In Service Extension Example are welcome from all!
+Contributions to the Measurement Plug-In Service Extension Example are welcome from all! This repo contains an example of integrating a custom-built service with the Measurement Plug-In framework.
 
 Measurement Plug-In Service Extension Example is managed via [git](https://git-scm.com), with the canonical upstream
 repository hosted on [GitHub](https://github.com/ni/measurement-plugin-service-extension-example/).
@@ -30,7 +30,7 @@ See [GitHub's official documentation](https://help.github.com/articles/using-pul
 
 ## Clone or Update the Git Repository
 
-To download the Measurement Plug-In Integration Example for Python source, clone its Git
+To download the Measurement Plug-In Service Extension Example for Python source, clone its Git
 repository to your local PC.
 
 ```cmd

@@ -13,9 +13,9 @@
 
 The Measurement Plug-In architecture is based on microservices, with components functioning as gRPC services. Since gRPC is network-based, it allows these components to be language-agnostic and work seamlessly across different programming environments. Any feature extensions or customizations, therefore, should also be implemented as gRPC services.
 
-A user-defined gRPC service is a custom-built service where you define the service methods and message types in a `.proto` file, generate client and server code, and implement the server logic. Registering this service with a discovery tool allows various clients to access and communicate with it over gRPC, making it easy to integrate across technology stacks.
+A user-defined gRPC service is a custom-built service where you define the service methods and message types in a `.proto` file, generate client and server code, and implement the server logic. Registering this service with the NI Discovery Service allows various clients to access and communicate with it over gRPC, making it easy to integrate across technology stacks.
 
-Data loggers are often used to record measurements and debug data during execution. For example, a logger implemented in Python might only be compatible with Python-based systems. However, if other measurement systems are written in languages like LabVIEW or C#, direct integration may not be possible. By converting the logger into a gRPC service and registering it with the discovery service, it becomes accessible to all measurement plug-ins, regardless of language.
+Data loggers are often used to record measurements and debug data during execution. For example, a logger implemented in Python might only be compatible with Python-based systems. However, if other measurement plug-ins are written in languages like LabVIEW or C#, direct integration may not be possible. By converting the logger into a gRPC service and registering it with the NI Discovery Service, it becomes accessible to all measurement plug-ins, regardless of language.
 
 ## User Workflow
 
@@ -49,7 +49,7 @@ Now, let's go through a step-by-step guide for creating a user-defined gRPC serv
 
 ### Note
 
-- Using the discovery service to dynamically resolve the service location is preferred over a
+- Using the NI Discovery Service to dynamically resolve the service location is preferred over a
   static port number as the port number may result in a conflict and are less adaptable to
   changes in the network environment.
 - Dynamic resolution of the services' port number allows services to be relocated or scaled across
@@ -83,7 +83,7 @@ registering it with the NI Discovery service.
     [link](https://github.com/ni/grpc-labview/blob/master/docs/QuickStart.md#labview-grpc)
     for installation instructions.
 
-- Generate client interfaces from the the .proto file to communicate with the service methods using
+- Generate client interfaces from the .proto file to communicate with the service methods using
   the `gRPC Server-Client [2] - Code Generator`.
   
   ![gRPC Server Client Generator](./docs/images/gRPC_Server_Client_Generator.png)
