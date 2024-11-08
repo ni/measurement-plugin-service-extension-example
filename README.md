@@ -30,8 +30,8 @@ Data loggers are often used to record measurements and debug data during executi
 
 Software dependencies,
 
-- [LabVIEW Measurement Plug-ins](./measurements/labview_measurement/README.md)
-- [Python Measurement Plug-ins](./measurements/python_measurement/README.md).
+- [LabVIEW Measurement Plug-ins](./examples/labview_measurement/README.md)
+- [Python Measurement Plug-ins](./examples/python_measurement/README.md).
 
 ## Steps to create a user-defined service
 
@@ -74,7 +74,7 @@ registering it with the NI Discovery service.
 - Define methods in the client class to call the service methods, constructing and sending requests
   as needed.
 - Example:
-  [Establish connection to custom logger service in python](./measurements/python_measurement/logger_service_client.py).
+  [Establish connection to custom logger service in python](./examples/python_measurement/logger_service_client.py).
 
 ## Steps to interact with the user-defined service by creating client modules in LabVIEW measurements
 
