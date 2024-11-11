@@ -1,7 +1,7 @@
 # Measurement Plug-In Service Extension Example
 
 - [Measurement Plug-In Service Extension Example](#measurement-plug-in-service-extension-example)
-  - [Extend Measurement Plug-In framework with custom features in Python](#extend-measurement-plug-in-framework-with-custom-features-in-python)
+  - [Custom Services in Measurement Plug-In framework](#custom-services-in-measurement-plug-in-framework)
   - [User Workflow](#user-workflow)
   - [Required Software](#required-software)
   - [Steps to create a user-defined service](#steps-to-create-a-user-defined-service)
@@ -9,7 +9,7 @@
   - [Steps to interact with the user-defined service by creating a client module in Python measurements](#steps-to-interact-with-the-user-defined-service-by-creating-a-client-module-in-python-measurements)
   - [Steps to interact with the user-defined service by creating client modules in LabVIEW measurements](#steps-to-interact-with-the-user-defined-service-by-creating-client-modules-in-labview-measurements)
 
-## Extend Measurement Plug-In framework with custom features in Python
+## Custom Services in Measurement Plug-In framework
 
 The Measurement Plug-In architecture is based on microservices, with components functioning as gRPC services. Since gRPC is network-based, it allows these components to be language-agnostic and work seamlessly across different programming environments. Any feature extensions or customizations, therefore, should also be implemented as gRPC services.
 
@@ -23,10 +23,10 @@ Data loggers are often used to record measurements and debug data during executi
 
 ## Required Software
 
-- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066)
-  or later
-- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
-  or later
+- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066) or later
+- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937) or later
+- [Python 3.9](https://www.python.org/downloads/release/python-390/) or later
+- [LabVIEW](https://www.ni.com/en/support/downloads/software-products/download.labview.html?srsltid=AfmBOoodoeCBIDbhGX4sSEVZ6WA_YbIXSdsnfHMejqtoGME3nEGfvxKg#544096) or later
 
 Software dependencies,
 

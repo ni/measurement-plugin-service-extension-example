@@ -1,6 +1,6 @@
 # Contributing to Measurement Plug-In Service Extension Example
 
-Contributions to the Measurement Plug-In Service Extension Example are welcome from all! This repo contains an example of integrating a custom-built service with the Measurement Plug-In framework.
+Contributions to the Measurement Plug-In Service Extension Example are welcome from all!
 
 Measurement Plug-In Service Extension Example is managed via [git](https://git-scm.com), with the canonical upstream
 repository hosted on [GitHub](https://github.com/ni/measurement-plugin-service-extension-example/).
