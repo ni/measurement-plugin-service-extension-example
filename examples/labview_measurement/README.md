@@ -22,22 +22,16 @@ includes additional functionality to log measurement data using a custom logging
 
 ## Software Requirements
 
-### Core Requirements
-
 - [LabVIEW 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.labview.html#443865) or later
 - [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066) or later
 - [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937) or later (recommended)
 - [NI-DCPower 2023 Q1](https://www.ni.com/en/support/downloads/drivers/download.ni-dcpower.html#477835) or later
-
-### Additional Tools
-
 - [gRPC Server-Client [2] - Code Generator](https://github.com/ni/grpc-labview/releases/download/v1.2.6.1/grpc-labview.zip)
 - [Measurement Plug-In SDK](https://github.com/ni/measurement-plugin-labview/releases/tag/v3.1.0.5)
 
 ## Hardware Requirements
 
 - This example requires an NI SMU that is supported by NI-DCPower (e.g. PXIe-4141).
-- [Simulation Setup Instructions](#simulation-setup)
 
 ## Simulation Setup
 

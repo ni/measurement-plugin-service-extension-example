@@ -20,15 +20,10 @@ showcases logging measurement data to a custom logging service.
 
 ## Software Requirements
 
-### Core Requirements
-
 - [Python 3.9](https://www.python.org/downloads/release/python-390/) or later
 - [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066) or later
 - [NI-DCPower 2023 Q1](https://www.ni.com/en/support/downloads/drivers/download.ni-dcpower.html#477835) or later
 - [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937) or later (recommended)
-
-### Python Dependencies
-
 - grpc-stubs==1.53 or later
 - grpcio==1.66 or later
 - grpcio-tools==1.59 or later
@@ -37,7 +32,6 @@ showcases logging measurement data to a custom logging service.
 ## Hardware Requirements
 
 - This example requires an NI SMU that is supported by NI-DCPower (e.g.PXIe-4141).
-- [Simulation Setup Instructions](#simulation-setup)
 
 ## Simulation Setup
 
