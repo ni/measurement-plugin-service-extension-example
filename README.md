@@ -6,8 +6,8 @@
   - [Required Software](#required-software)
   - [Steps to create a user-defined service](#steps-to-create-a-user-defined-service)
     - [Note](#note)
-  - [Steps to interact with the user-defined service by creating a client module in Python measurements](#steps-to-interact-with-the-user-defined-service-by-creating-a-client-module-in-python-measurements)
-  - [Steps to interact with the user-defined service by creating client modules in LabVIEW measurements](#steps-to-interact-with-the-user-defined-service-by-creating-client-modules-in-labview-measurements)
+  - [Creating Python Client Modules](#creating-python-client-modules)
+  - [Creating LabVIEW Client Modules](#creating-labview-client-modules)
 
 ## Custom Services in Measurement Plug-In framework
 
@@ -61,7 +61,7 @@ registering it with the NI Discovery service.
 
 ![Register logger service](./docs/images/register_service_flowchart.JPG)
 
-## Steps to interact with the user-defined service by creating a client module in Python measurements
+## Creating Python Client Modules
 
 - Generate the client stubs for the user-defined service.
 - Refer to the [instructions](https://grpc.io/docs/languages/python/basics/#creating-a-stub) to
@@ -76,7 +76,7 @@ registering it with the NI Discovery service.
 - Example:
   [Establish connection to custom logger service in python](./examples/python_measurement/logger_service_client.py).
 
-## Steps to interact with the user-defined service by creating client modules in LabVIEW measurements
+## Creating LabVIEW Client Modules
 
 - Install gRPC and LabVIEW gRPC Server and Client tool packages.
   - Refer to this
