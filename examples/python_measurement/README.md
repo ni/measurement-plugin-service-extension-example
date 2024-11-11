@@ -18,36 +18,36 @@ showcases logging measurement data to a custom logging service.
 - Uses the NI gRPC Device Server to allow sharing instrument sessions with other
   measurement services when running measurements from TestStand.
 
-## Required Software
+## Software Requirements
 
-- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066)
-  or later
-- NI-DCPower
-- Recommended: [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937)
-  or later
+### Core Requirements
+
+- [Python 3.9](https://www.python.org/downloads/release/python-390/) or later
+- [InstrumentStudio 2024 Q3](https://www.ni.com/en/support/downloads/software-products/download.instrumentstudio.html#544066) or later
+- [NI-DCPower 2023 Q1](https://www.ni.com/en/support/downloads/drivers/download.ni-dcpower.html#477835) or later
+- [TestStand 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937) or later (recommended)
+
+### Python Dependencies
+
 - grpc-stubs==1.53 or later
 - grpcio==1.66 or later
 - grpcio-tools==1.59 or later
 - protobuf==4.25.4 or later
 
-## Required Hardware
+## Hardware Requirements
 
-This example requires an NI SMU that is supported by NI-DCPower (e.g.
-PXIe-4141).
+- This example requires an NI SMU that is supported by NI-DCPower (e.g.PXIe-4141).
+- [Simulation Setup Instructions](#simulation-setup)
 
-By default, this example uses a physical instrument or a simulated instrument
-created in NI MAX. To automatically simulate an instrument without using NI MAX,
-follow the steps below:
+## Simulation Setup
 
-- Create a `.env` file in the measurement service's directory or one of its
-  parent directories (such as the root of your Git repository or
-  `C:\ProgramData\National Instruments\Plug-Ins\Measurements` for statically
-  registered measurement services).
-- Add the following options to the `.env` file to enable simulation via the
-  driver's option string:
+To enable driver simulation:
 
-  ```python
-  MEASUREMENT_PLUGIN_NIDCPOWER_SIMULATE=1
-  MEASUREMENT_PLUGIN_NIDCPOWER_BOARD_TYPE=PXIe
-  MEASUREMENT_PLUGIN_NIDCPOWER_MODEL=4141
-  ```
+1. Create a `.env` file in the measurement service's directory or parent directory or one of its parent directories (such as the root of your Git repository or `C:\ProgramData\National Instruments\Plug-Ins\Measurements` for statically registered measurement services).
+2. Add the following configuration:
+
+```env
+MEASUREMENT_PLUGIN_NIDCPOWER_SIMULATE=1
+MEASUREMENT_PLUGIN_NIDCPOWER_BOARD_TYPE=PXIe
+MEASUREMENT_PLUGIN_NIDCPOWER_MODEL=4141
+```
