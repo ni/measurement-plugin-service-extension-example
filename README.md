@@ -28,11 +28,6 @@ Data loggers are often used to record measurements and debug data during executi
 - [Python 3.9](https://www.python.org/downloads/release/python-390/) or later
 - [LabVIEW 2021 SP1](https://www.ni.com/en/support/downloads/software-products/download.labview.html#443865) or later
 
-Software dependencies,
-
-- [LabVIEW Measurement Plug-ins](./examples/labview_measurement/README.md)
-- [Python Measurement Plug-ins](./examples/python_measurement/README.md).
-
 ## Steps to create a user-defined service
 
 Now, let's go through a step-by-step guide for creating a user-defined gRPC service in Python.
