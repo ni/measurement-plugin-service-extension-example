@@ -44,7 +44,7 @@ Service, it becomes accessible to all measurement plug-ins, regardless of langua
   SP1](https://www.ni.com/en/support/downloads/software-products/download.labview.html#443865) or
   later
 
-Package dependencies,
+Package dependencies:
 
 - [Measurement Plug-In SDK Service for
   LabVIEW](https://www.vipm.io/package/ni_measurement_plugin_sdk_service/)
