@@ -28,6 +28,8 @@ showcases logging measurement data to a custom logging service.
 - [TestStand 2021
   SP1](https://www.ni.com/en/support/downloads/software-products/download.teststand.html#445937) or
   later (recommended)
+- [Measurement Plug-In SDK Service for
+  Python](https://pypi.org/project/ni_measurement_plugin_sdk_service/)
 - grpc-stubs==1.53 or later
 - grpcio==1.66 or later
 - grpcio-tools==1.59 or later
