@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SourceFile Checksum="B866B57A99E5B56ADF8B0F414FAF3549259A6520A3A1A3B7A72A2DD07E3B526FAF8315A30328B84922AF149BAB040F4F7900D6E30A40A4DBD1DD8C900C30A904" xmlns="http://www.ni.com/PlatformFramework">
+<SourceFile Checksum="0BA35F3810A0FDE7D9908E951E2D234D2CA7FFAA2B9403AE25669F94BF33A7FA6A4A3829A22D76F35E05FBC482C98D6B0E16EA5CCA69227990112D8D712621AB" xmlns="http://www.ni.com/PlatformFramework">
 	<SourceModelFeatureSet>
-		<ParsableNamespace AssemblyFileVersion="24.5.0.50111" FeatureSetName="Pin Map" Name="http://www.ni.com/InstrumentFramework/PinMap" OldestCompatibleVersion="21.3.0.0" Version="21.3.0.0" />
-		<ParsableNamespace AssemblyFileVersion="9.13.0.50111" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
-		<ApplicationVersionInfo Build="24.5.0.50111" Name="InstrumentStudio" PersistenceVersion="22.1.0.0" Version="24.5.0.50111" />
+		<ParsableNamespace AssemblyFileVersion="24.8.0.49911" FeatureSetName="Pin Map" Name="http://www.ni.com/InstrumentFramework/PinMap" OldestCompatibleVersion="21.3.0.0" Version="21.3.0.0" />
+		<ParsableNamespace AssemblyFileVersion="9.14.0.49911" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
+		<ApplicationVersionInfo Build="24.8.0.49911" Name="InstrumentStudio" PersistenceVersion="22.1.0.0" Version="24.8.0.49911" />
 	</SourceModelFeatureSet>
 	<Project xmlns="http://www.ni.com/PlatformFramework">
 		<EnvoyManagerRootEnvoy Id="41cfeabfcd4a4367beec12efa26c714f" ModelDefinitionType="EnvoyManagerRootEnvoy" Name="RootEnvoy" />
@@ -12,9 +12,15 @@
 		</EmbeddedDefinitionReference>
 		<NameScopingEnvoy Id="204359c652f64a238667aa940faa6649" ModelDefinitionType="DefaultTarget" Name="DefaultTarget">
 			<DefaultTarget />
-			<SourceFileReference Bindings="EnvoyManager" Id="78152d6ec134497b89f2ad8bb85f6b5e" ModelDefinitionType="NationalInstruments.InstrumentFramework.Document.SourceModel.UnifiedTask" Name="NIDCPowerSourceDCVoltage.sfp" StoragePath="NIDCPowerSourceDCVoltage.sfp" />
 			<FileReference Id="c3e2edae7e684dfdbf0cf2c0680cfd15" ModelDefinitionType="{http://www.ni.com/InstrumentFramework/PinMap}PinMapDefinition" Name="NIDCPowerSourceDCVoltage.pinmap" StoragePath="NIDCPowerSourceDCVoltage.pinmap" p4:IsActive="True" xmlns:p4="http://www.ni.com/InstrumentFramework/PinMap" />
+			<SourceFileReference Bindings="EnvoyManager" Id="7afa0ac45afe417bb9bdde48a2b3b8f8" ModelDefinitionType="NationalInstruments.InstrumentFramework.Document.SourceModel.UnifiedTask" Name="NIDCPowerSourceDCVoltage.sfp" StoragePath="NIDCPowerSourceDCVoltage.sfp" />
 		</NameScopingEnvoy>
 	</Project>
-	<ProjectInformation xmlns="http://www.ni.com/PlatformFramework" />
+	<ProjectInformation xmlns="http://www.ni.com/PlatformFramework">
+		<p.ProjectProperties>
+			<Kind Name="plugin.reference">
+				<Item Name="ni.examples.NIDCPowerSourceDCVoltageWithLogger_LabVIEW" Value="1.0.0" />
+			</Kind>
+		</p.ProjectProperties>
+	</ProjectInformation>
 </SourceFile>

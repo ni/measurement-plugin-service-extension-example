@@ -1,8 +1,9 @@
 {
   "services": [
     {
-      "displayName": "NI-DCPower Source DC Voltage (Py)",
-      "serviceClass": "ni.examples.NIDCPowerSourceDCVoltage_Python",
+      "displayName": "NI-DCPower Source DC Voltage with Logger (Py)",
+      "version": "1.0.0",
+      "serviceClass": "ni.examples.NIDCPowerSourceDCVoltageWithLogger_Python",
       "descriptionUrl": "",
       "providedInterfaces": [
         "ni.measurementlink.measurement.v1.MeasurementService",

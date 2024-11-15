@@ -2810,10 +2810,10 @@
 													<Measurement classname='Obj'>
 														<subprops>
 															<Version classname='Str'>
-																<value/>
+																<value>1.0.0</value>
 															</Version>
 															<Name classname='Str'>
-																<value>ni.examples.NIDCPowerSourceDCVoltage_LabVIEW</value>
+																<value>ni.examples.NIDCPowerSourceDCVoltageWithLogger_LabVIEW</value>
 															</Name>
 															<Parameters classname='Objs'>
 																<value lbound='[0]' ubound='[10]'>
@@ -2860,7 +2860,7 @@
 																					<value>pin_names</value>
 																				</Name>
 																				<ArgumentValue classname='ExprValue'>
-																					<value>{"Pin1"}</value>
+																					<value>#NoValidation({""} = {})</value>
 																				</ArgumentValue>
 																				<Direction classname='Str'>
 																					<value>In</value>
@@ -3040,7 +3040,7 @@
 																					<value>source_delay</value>
 																				</Name>
 																				<ArgumentValue classname='ExprValue'>
-																					<value>1</value>
+																					<value>0</value>
 																				</ArgumentValue>
 																				<Direction classname='Str'>
 																					<value>In</value>
