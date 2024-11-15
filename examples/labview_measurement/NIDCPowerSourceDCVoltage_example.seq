@@ -2860,7 +2860,7 @@
 																					<value>pin_names</value>
 																				</Name>
 																				<ArgumentValue classname='ExprValue'>
-																					<value>#NoValidation({""} = {})</value>
+																					<value>{"Pin1"}</value>
 																				</ArgumentValue>
 																				<Direction classname='Str'>
 																					<value>In</value>
