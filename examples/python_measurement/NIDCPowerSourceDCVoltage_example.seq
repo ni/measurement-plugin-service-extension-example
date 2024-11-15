@@ -2632,10 +2632,10 @@
 													<Measurement classname='Obj'>
 														<subprops>
 															<Version classname='Str'>
-																<value/>
+																<value>1.0.0</value>
 															</Version>
 															<Name classname='Str'>
-																<value>ni.examples.NIDCPowerSourceDCVoltage_Python</value>
+																<value>ni.examples.NIDCPowerSourceDCVoltageWithLogger_Python</value>
 															</Name>
 															<Parameters classname='Objs'>
 																<value lbound='[0]' ubound='[7]'>

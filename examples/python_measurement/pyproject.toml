@@ -6,15 +6,18 @@ description = "Measurement plug-in example that sources and measures a DC voltag
 authors = ["National Instruments"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 nidcpower = { version = ">=1.4.4", extras = ["grpc"] }
-ni-measurement-plugin-sdk-service = {version = "^2.0.0"}
+ni-measurement-plugin-sdk-service = {version = "^2.1.0"}
 click = ">=7.1.2, !=8.1.4" # mypy fails with click 8.1.4: https://github.com/pallets/click/issues/2558
-grpcio = "*"
+grpcio-tools = "1.49.1"
+mypy-protobuf = "^3.6.0"
 
 [tool.poetry.group.dev.dependencies]
 ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
+protobuf = "^4.21"
+types-protobuf = "^4.21"
 grpc-stubs = "^1.53"
 
 [tool.black]

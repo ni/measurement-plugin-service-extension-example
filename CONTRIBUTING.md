@@ -103,7 +103,7 @@ poetry run mypy src
 Use [Bandit](https://pypi.org/project/bandit/) to check for common security issues.
 
 ```cmd
-poetry run bandit -c pyproject.toml -r src
+poetry run bandit -c pyproject.toml -r <directory>
 ```
 
 # Adding Dependencies
